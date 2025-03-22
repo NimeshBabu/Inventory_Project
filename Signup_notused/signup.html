@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INVENTRIX </title>
+    <link rel="stylesheet" href="./css/style-signup.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="alert-container"></div>
+
+    <section class="container">
+        <div class="form-content">
+            <div class="form signup">
+                <div class="form-title">
+                    <h1>Sign Up</h1>
+                </div>
+
+                
+                <form action="signup.php" method="POST">
+                    <div class="input-field">
+                        <label for="signup-email">E-mail :</label>
+                        <input type="email" placeholder="Enter your E-mail" name="email" id="email" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="signup-password">Password :</label>
+                        <input type="password" placeholder="Enter your password" name="password" id="password" required>
+                        <i class="ri-eye-off-line"></i>
+                    </div>
+                    <button type="submit" class="login-btn">Continue</button>
+                    <div class="signup-option">
+                        <p>Already have an account? <a href="login.html">Login</a></p>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        <div class="form-banner signup-banner"></div>
+    </section>
+    <script src="./js/scripts.js"></script>
+    <script src="./js/login_signup.js"></script>
+</body>
+
+</html>
