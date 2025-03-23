@@ -1,3 +1,16 @@
+<?php
+// Database connection
+$con=mysqli_connect(hostname: "localhost",username: "root",password: "", database: "inventrix");
+
+if (!$con){
+    die("Sorry we failed to connect: ".mysqli_connect_error()); 
+}
+
+// Fetch supplier data
+$sql = "SELECT `Supplier-PAN` FROM `supplier`";
+$result = $con->query(query: $sql);
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -16,7 +29,7 @@
 </head>
 
 <body class="  ">
-    
+    <div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -69,12 +82,12 @@
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="./page-list-product.html">
+                                    <a href="./page-list-product.php">
                                         <i class="las la-minus"></i><span>List Product</span>
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="./page-add-product.html">
+                                    <a href="./page-add-product.php">
                                         <i class="las la-minus"></i><span>Add Product</span>
                                     </a>
                                 </li>
@@ -123,7 +136,7 @@
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                            <a href="./page-list-purchase.html">
+                                            <a href="./page-list-purchase.php">
                                                 <i class="las la-minus"></i><span>List Purchases</span>
                                             </a>
                                     </li>
@@ -156,7 +169,7 @@
                             </a>
                             <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class=" ">
-                                    <a href="./page-list-suppliers.html">
+                                    <a href="./page-list-suppliers.php">
                                         <i class="las la-minus"></i><span>List Suppliers</span>
                                     </a>
                                 </li>
@@ -284,12 +297,12 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="./page-list-product.html" data-toggle="validator">
+                                <form action="addproduct.php" data-toggle="validator" method="POST">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Product Name *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Product Name"
+                                                <input type="text" class="form-control" placeholder="Enter Product Name" name="prod_name" id="prod_name"
                                                     data-errors="Please Enter The Name." required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -297,23 +310,40 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Product Code *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Product Code"
+                                                <input type="text" class="form-control" placeholder="Enter Product Code" name="prod_code" id="prod_code"
                                                     data-errors="Please Enter The Code." required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
+                                        
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Supplier *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Supplier"
-                                                    required>
+                                                <label>Supplier-PAN *</label>
+                                                <select class="form-control" name="supplier-pan" id="supplier-pan" required>
+                                                    <option value="" disabled selected>Select Supplier-PAN</option>
+                                                    <?php
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . htmlspecialchars($row['Supplier-PAN']) . "'>" . htmlspecialchars($row['Supplier-PAN']) . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value=''>No Supplier-PAN available</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
+
+                                        <?php
+                                        $con->close();
+                                        ?>
+
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Cost *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Cost"
+                                                <input type="text" class="form-control" placeholder="Enter Cost" name="cost" id="cost"
                                                     data-errors="Please Enter Cost." required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -321,22 +351,30 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Price *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Price"
-                                                    data-errors="Please Enter Price." required>
+                                                <input type="text" class="form-control" placeholder="Enter Price" name="price" id="price"
+                                                    data-errors="Please Enter Price." required> 
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Quantity *</label>
+                                                <input type="text" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity"
+                                                    data-errors="Please Enter Quantity." required> 
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Image</label>
-                                                <input type="file" class="form-control image-file" name="pic"
+                                                <input type="url" class="form-control image-file" placeholder="Enter Image URL" name="image" id="image"
                                                     accept="image/*">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Description / Product Details</label>
-                                                <textarea class="form-control"  maxlength="30"></textarea>
+                                                <textarea class="form-control"  maxlength="30" name="desc" id="desc" placeholder="Enter Description of Product"></textarea> 
                                             </div>
                                         </div>
                                     </div>
@@ -363,6 +401,7 @@
 
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
+    <script src="./js/login_signup.js"></script>
 </body>
 
 </html>

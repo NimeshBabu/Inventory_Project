@@ -1,3 +1,12 @@
+<?php
+ require_once('config/db.php');
+ $query= "select * from `product`";
+ $result= mysqli_query($con,$query);
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -16,7 +25,7 @@
 </head>
 
 <body class="  ">
-  
+    
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -68,13 +77,13 @@
                                 </svg>
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="active">
-                                    <a href="./page-list-product.html">
+                                <li class="">
+                                    <a href="./page-list-product.php">
                                         <i class="las la-minus"></i><span>List Product</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="./page-add-product.html">
+                                    <a href="./page-add-product.php">
                                         <i class="las la-minus"></i><span>Add Product</span>
                                     </a>
                                 </li>
@@ -122,8 +131,8 @@
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                            <a href="./page-list-purchase.html">
+                                    <li class="active">
+                                            <a href="./page-list-purchase.php">
                                                 <i class="las la-minus"></i><span>List Purchases</span>
                                             </a>
                                     </li>
@@ -157,7 +166,7 @@
                             </a>
                             <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class=" ">
-                                    <a href="./page-list-suppliers.html">
+                                    <a href="./page-list-suppliers.php">
                                         <i class="las la-minus"></i><span>List Suppliers</span>
                                     </a>
                                 </li>
@@ -274,255 +283,53 @@
                 </nav>
             </div>
         </div>
-
         <div class="content-page">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                             <div>
-                                <h4 class="mb-3">Product List</h4>
+                                <h4 class="mb-3">Purchase List</h4>
                             </div>
-                            <a href="./page-add-product.html" class="btn btn-primary add-list"><i
-                                    class="las la-plus mr-3"></i>Add Product</a>
+                            <a href="./page-add-purchase.html" class="btn btn-primary add-list"><i
+                                class="las la-plus mr-3"></i>Add Purchase</a>
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="table-responsive rounded mb-3 ">
+                        <div class="table-responsive rounded mb-3">
                             <table class="data-tables table mb-0 tbl-server-info">
                                 <thead class="bg-white text-uppercase">
                                     <tr class="ligth ligth-data">
-                                        <th>Product Name</th>
+                                        <th>Date</th>
                                         <th>Product Code</th>
                                         <th>Supplier</th>
-                                        <th>Cost</th>
-                                        <th>Price</th>
                                         <th>Quantity</th>
-                                        <th>Delete</th>
+                                        <th>Purchased Amount</th>
+                                        <th>Payment Status</th>
                                     </tr>
                                 </thead>
                                 <tbody class="ligth-body">
                                     <tr>
+                                        <?php
+                                        while($row= mysqli_fetch_assoc($result))
+                                        {
+                                        ?>
+                                        <td><?php echo $row['Date']; ?></td>
+                                        <td><?php echo $row['ProductCode']; ?></td>
+                                        <td><?php echo $row['Supplier']; ?></td>
+                                        <td><?php echo $row['Quantity']; ?></td>
+                                        <td><?php echo $row['PurchaseAmount']; ?></td>
+                                        <td><?php echo $row['PaymentStatus']; ?></td>
+                                        <td><a href="deletepurchase.php?pan=<?php echo $row['PANNo'] ?>" class="btn btn-primary">Delete</a></td>
+                                        </tr>
+                                        <?php
+                                        }
+
                                         
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/01.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Organic Cream
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>CREM01</td>
-                                        <td></td>
-                                        <td>$10.00</td>
-                                        <td>$25.00</td>
-                                        <td>10.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
+                                        ?>
                                         
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/02.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Rain Umbrella
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>UM01</td>
-                                        <td></td>
-                                        <td>$20.00</td>
-                                        <td>$30.00</td>
-                                        <td>15.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/03.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Serum Bottle
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>SEM01</td>
-                                        <td></td>
-                                        <td>$25.00</td>
-                                        <td>$50.00</td>
-                                        <td>50.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/04.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Coffee Beans
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>COF01</td>
-                                        <td></td>
-                                        <td>$20.00</td>
-                                        <td>$32.00</td>
-                                        <td>50.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/05.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Book Shelves
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>FUN01</td>
-                                        <td></td>
-                                        <td>$30.00</td>
-                                        <td>$30.00</td>
-                                        <td>25.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/06.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Dinner Set
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>DIS01</td>
-                                        <td></td>
-                                        <td>$20.00</td>
-                                        <td>$30.00</td>
-                                        <td>50.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/07.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Nike Shoes
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>NIS01</td>
-                                        <td></td>
-                                        <td>$50.00</td>
-                                        <td>$78.00</td>
-                                        <td>100.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/08.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Computer Glasses
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>COG01</td>
-                                        <td></td>
-                                        <td>$20.00</td>
-                                        <td>$25.00</td>
-                                        <td>30.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <img src="./assets/images/table/product/09.jpg"
-                                                    class="img-fluid rounded avatar-50 mr-3" alt="image">
-                                                <div>
-                                                    Alloy Jewel Set
-                                                    <p class="mb-0"><small>This is test Product</small></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>AJS01</td>
-                                        <td></td>
-                                        <td>$50.00</td>
-                                        <td>$150.00</td>
-                                        <td>200.0</td>
-                                        <td>
-                                            <div class="d-flex align-items-center list-action">
-                                                <a class="badge bg-warning mr-2" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -530,12 +337,14 @@
                 </div>
                 <!-- Page end  -->
             </div>
-            
-            
         </div>
     </div>
     <!-- Wrapper End-->
-    
+
+
+
+
+
      <!-- Backend Bundle JavaScript -->
      <script src="./js/backend-bundle.min.js"></script>
 

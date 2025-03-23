@@ -1,3 +1,13 @@
+<?php
+ require_once('config/db.php');
+ $query= "select * from `product`";
+ $result= mysqli_query($con,$query);
+
+?>
+
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -16,7 +26,7 @@
 </head>
 
 <body class="  ">
-    
+<div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -68,13 +78,13 @@
                                 </svg>
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="">
-                                    <a href="./page-list-product.html">
+                                <li class="active">
+                                    <a href="./page-list-product.php">
                                         <i class="las la-minus"></i><span>List Product</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="./page-add-product.html">
+                                    <a href="./page-add-product.php">
                                         <i class="las la-minus"></i><span>Add Product</span>
                                     </a>
                                 </li>
@@ -122,8 +132,8 @@
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="active">
-                                            <a href="./page-list-purchase.html">
+                                    <li class="">
+                                            <a href="./page-list-purchase.php">
                                                 <i class="las la-minus"></i><span>List Purchases</span>
                                             </a>
                                     </li>
@@ -157,7 +167,7 @@
                             </a>
                             <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class=" ">
-                                    <a href="./page-list-suppliers.html">
+                                    <a href="./page-list-suppliers.php">
                                         <i class="las la-minus"></i><span>List Suppliers</span>
                                     </a>
                                 </li>
@@ -274,150 +284,58 @@
                 </nav>
             </div>
         </div>
+
         <div class="content-page">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+                        <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                             <div>
-                                <h4 class="mb-3">Purchase List</h4>
+                                <h4 class="mb-3">Product List</h4>
                             </div>
-                            <a href="./page-add-purchase.html" class="btn btn-primary add-list"><i
-                                class="las la-plus mr-3"></i>Add Purchase</a>
+                            <a href="./page-add-product.php" class="btn btn-primary add-list"><i
+                                    class="las la-plus mr-3"></i>Add Product</a>
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="table-responsive rounded mb-3">
+                        <div class="table-responsive rounded mb-3 ">
                             <table class="data-tables table mb-0 tbl-server-info">
                                 <thead class="bg-white text-uppercase">
                                     <tr class="ligth ligth-data">
-                                        <th>Date</th>
-                                        <th>Purchase ID</th>
-                                        
+                                        <th>Product Name</th>
                                         <th>Product Code</th>
-                                        <th>Supplier</th>
+                                        <th>Supplier-PAN</th>
+                                        <th>Cost</th>
+                                        <th>Price</th>
                                         <th>Quantity</th>
-                                        <th>Purchased Amount</th>
-                                        <th>Payment Status</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody class="ligth-body">
                                     <tr>
-                                        <td>01 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Fruits Supply</td>
-                                        <td></td>
-                                        <td>50.1</td>
+                                        <?php
+                                        while($row= mysqli_fetch_assoc($result))
+                                        {
+                                        ?>
                                         <td>
-                                            <div class="badge badge-success">Paid</div>
+                                            <div class="d-flex align-items-center">
+                                            <img src="<?php echo $row['Url']; ?>" alt="Img" style="width:50px; height:50px; border-radius: 10px; object-fit: cover; margin-right: 10px;">
+                                                <div style="display: flex; flex-direction: column; justify-content: center;">
+                                                <strong><?php echo $row['ProductName']; ?></strong>
+                                                <p class="mb-0 text-muted"><small><?php echo $row['Description']; ?></small></p>
+                                                </div>
+                                            </div>
                                         </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>05 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Footwear Supply</td>
-                                        <td></td>
-                                        <td>40.5</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>06 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Furniture Supply</td>
-                                        <td></td>
-                                        <td>80.1</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>08 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Food Supply</td>
-                                        <td></td>
-                                        <td>30.1</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>09 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Grocery Supply</td>
-                                        <td></td>
-                                        <td>20.1</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>10 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Packing Supply</td>
-                                        <td></td>
-                                        <td>60.1</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>12 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Fish Supply</td>
-                                        <td></td>
-                                        <td>33.1</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>12 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Cloth Supply</td>
-                                        <td></td>
-                                        <td>10.1</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>13 jan 2021</td>
-                                        <td></td>
-
-                                        <td></td>
-                                        <td>Toy Supply</td>
-                                        <td></td>
-                                        <td>10.1</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
+                                        <td><?php echo $row['ProductCode']; ?></td>
+                                        <td><?php echo $row['Supplier-PAN']; ?></td>
+                                        <td><?php echo $row['Cost']; ?></td>
+                                        <td><?php echo $row['Price']; ?></td>
+                                        <td><?php echo $row['Quantity']; ?></td>
+                                        <td><a href="deleteproduct.php?prod_code=<?php echo $row['ProductCode'] ?>" class="btn btn-primary">Delete</a></td>
+                                        </tr>
+                                        <?php
+                                        }  
+                                        ?>
                                 </tbody>
                             </table>
                         </div>
@@ -425,14 +343,12 @@
                 </div>
                 <!-- Page end  -->
             </div>
+            
+            
         </div>
     </div>
     <!-- Wrapper End-->
-
-
-
-
-
+    
      <!-- Backend Bundle JavaScript -->
      <script src="./js/backend-bundle.min.js"></script>
 
@@ -440,7 +356,7 @@
      <script src="./js/table-treeview.js"></script>
  
  
- 
+     <script src="./js/login_signup.js"></script>
      <!-- app JavaScript -->
      <script src="./js/app.js"></script>
 </body>

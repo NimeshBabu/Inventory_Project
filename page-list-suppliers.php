@@ -81,12 +81,12 @@
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="./page-list-product.html">
+                                    <a href="./page-list-product.php">
                                         <i class="las la-minus"></i><span>List Product</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="./page-add-product.html">
+                                    <a href="./page-add-product.php">
                                         <i class="las la-minus"></i><span>Add Product</span>
                                     </a>
                                 </li>
@@ -135,7 +135,7 @@
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class=" ">
-                                            <a href="./page-list-purchase.html">
+                                            <a href="./page-list-purchase.php">
                                                 <i class="las la-minus"></i><span>List Purchases</span>
                                             </a>
                                     </li>
@@ -170,7 +170,7 @@
                             </a>
                             <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="active">
-                                    <a href="./page-list-suppliers.html">
+                                    <a href="./page-list-suppliers.php">
                                         <i class="las la-minus"></i><span>List Suppliers</span>
                                     </a>
                                 </li>
@@ -309,7 +309,7 @@
                                 <thead class="bg-white text-uppercase">
                                     <tr class="ligth ligth-data">
                                         
-                                        <th>Company Name</th>
+                                        <th>Supplier</th>
                                         <th>E-mail</th>
                                         <th>Phone Number</th>
                                         <th>Address</th>

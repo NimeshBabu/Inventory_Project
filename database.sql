@@ -15,6 +15,13 @@ CREATE TABLE IF NOT EXISTS Product (
     Url VARCHAR(100),
     Quantity INT NOT NULL CHECK (Quantity >= 0)
 );
+-- Referencing to supplier table
+ALTER TABLE product 
+ADD COLUMN SupplierID INT NOT NULL,
+ADD CONSTRAINT fk_supplier FOREIGN KEY (SupplierID) REFERENCES supplier(SupplierID) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
 
 -- Sales Table
 CREATE TABLE IF NOT EXISTS Sales (
