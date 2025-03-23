@@ -138,7 +138,7 @@
                                             </a>
                                     </li>
                                     <li class="">
-                                        <a href="./page-add-purchase.html">
+                                        <a href="./page-add-purchase.php">
                                             <i class="las la-minus"></i><span>Add purchase</span>
                                         </a>
                                     </li>
@@ -331,7 +331,7 @@
                                         <td><?php echo $row['Cost']; ?></td>
                                         <td><?php echo $row['Price']; ?></td>
                                         <td><?php echo $row['Quantity']; ?></td>
-                                        <td><a href="deleteproduct.php?prod_code=<?php echo $row['ProductCode'] ?>" class="btn btn-primary">Delete</a></td>
+                                        <td><a href="deleteproduct.php?prod_code=<?php echo $row['ProductCode'] ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a></td>
                                         </tr>
                                         <?php
                                         }  

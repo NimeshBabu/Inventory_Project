@@ -1,7 +1,7 @@
 <?php
- require_once('config/db.php');
- $query= "select * from `product`";
- $result= mysqli_query($con,$query);
+require_once('config/db.php');
+$query = "select * from `purchase`";
+$result = mysqli_query($con, $query);
 
 ?>
 
@@ -25,7 +25,7 @@
 </head>
 
 <body class="  ">
-    
+
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -122,25 +122,27 @@
                         </li>
                         <li class=" ">
                             <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                     <line x1="1" y1="10" x2="23" y2="10"></line>
                                 </svg>
                                 <span class="ml-4">Purchases</span>
                                 <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="active">
-                                            <a href="./page-list-purchase.php">
-                                                <i class="las la-minus"></i><span>List Purchases</span>
-                                            </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="./page-add-purchase.html">
-                                            <i class="las la-minus"></i><span>Add purchase</span>
-                                        </a>
-                                    </li>
+                                <li class="active">
+                                    <a href="./page-list-purchase.php">
+                                        <i class="las la-minus"></i><span>List Purchases</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="./page-add-purchase.php">
+                                        <i class="las la-minus"></i><span>Add purchase</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
@@ -177,7 +179,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
 
 
                     </ul>
@@ -238,7 +240,7 @@
                                         </svg>
                                         <span class="bg-primary"></span>
                                     </a>
-                                    
+
                                 </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
@@ -291,8 +293,8 @@
                             <div>
                                 <h4 class="mb-3">Purchase List</h4>
                             </div>
-                            <a href="./page-add-purchase.html" class="btn btn-primary add-list"><i
-                                class="las la-plus mr-3"></i>Add Purchase</a>
+                            <a href="./page-add-purchase.php" class="btn btn-primary add-list"><i
+                                    class="las la-plus mr-3"></i>Add Purchase</a>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -302,34 +304,55 @@
                                     <tr class="ligth ligth-data">
                                         <th>Date</th>
                                         <th>Product Code</th>
-                                        <th>Supplier</th>
+                                        <th>Supplier-PAN</th>
                                         <th>Quantity</th>
                                         <th>Purchased Amount</th>
                                         <th>Payment Status</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody class="ligth-body">
                                     <tr>
                                         <?php
-                                        while($row= mysqli_fetch_assoc($result))
-                                        {
+                                        while ($row = mysqli_fetch_assoc($result)) {
                                         ?>
-                                        <td><?php echo $row['Date']; ?></td>
-                                        <td><?php echo $row['ProductCode']; ?></td>
-                                        <td><?php echo $row['Supplier']; ?></td>
-                                        <td><?php echo $row['Quantity']; ?></td>
-                                        <td><?php echo $row['PurchaseAmount']; ?></td>
-                                        <td><?php echo $row['PaymentStatus']; ?></td>
-                                        <td><a href="deletepurchase.php?pan=<?php echo $row['PANNo'] ?>" class="btn btn-primary">Delete</a></td>
-                                        </tr>
-                                        <?php
-                                        }
+                                            <td><?php echo $row['Date']; ?></td>
+                                            <td><?php echo $row['ProductCode']; ?></td>
+                                            <td><?php echo $row['Supplier-PAN']; ?></td>
+                                            <td><?php echo $row['Quantity']; ?></td>
+                                            <td><?php echo $row['PurchaseAmount']; ?></td>
+                                            <td>
+                                                <?php
+                                                $status = $row['PaymentStatus'];
+                                                if ($status === 'Paid') {
+                                                    echo "<span class='badge' style='background:rgb(6, 151, 6); color:white; font-weight: bold;'>Paid</span>";
 
-                                        
-                                        ?>
-                                        
-                                    
-                                    
+                                                } elseif ($status === 'Unpaid') {
+                                                    echo "<span class='badge' style='background:rgb(216, 2, 9); color:white; font-weight: bold;'>Unpaid</span>";
+
+
+                                                } elseif ($status === 'Due') {
+                                                    echo "<span class='badge' style='background: #908f8f; color:white; font-weight: bold;'>Due</span>";
+
+
+                                                }
+                                                ?>
+                                            </td>
+
+
+
+
+
+                                            <td>
+                                                <form method="post" action="deletepurchase.php" style="display:inline;">
+                                                    <input type="hidden" name="purchase_id" id="purchase_id" value="<?php echo $row['PurchaseID']; ?>">
+                                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this purchase?');">Delete</button>
+                                                </form>
+                                                </>
+                                    </tr>
+                                <?php
+                                        }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
@@ -345,16 +368,16 @@
 
 
 
-     <!-- Backend Bundle JavaScript -->
-     <script src="./js/backend-bundle.min.js"></script>
+    <!-- Backend Bundle JavaScript -->
+    <script src="./js/backend-bundle.min.js"></script>
 
-     <!-- Table Treeview JavaScript -->
-     <script src="./js/table-treeview.js"></script>
- 
- 
- 
-     <!-- app JavaScript -->
-     <script src="./js/app.js"></script>
+    <!-- Table Treeview JavaScript -->
+    <script src="./js/table-treeview.js"></script>
+
+
+
+    <!-- app JavaScript -->
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

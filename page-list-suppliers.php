@@ -140,7 +140,7 @@
                                             </a>
                                     </li>
                                     <li class="">
-                                        <a href="./page-add-purchase.html">
+                                        <a href="./page-add-purchase.php">
                                             <i class="las la-minus"></i><span>Add purchase</span>
                                         </a>
                                     </li>
@@ -328,7 +328,7 @@
                                         <td><?php echo $row['PhoneNo']; ?></td>
                                         <td><?php echo $row['Address']; ?></td>
                                         <td><?php echo $row['PANNo']; ?></td>
-                                        <td><a href="deletesupplier.php?pan=<?php echo $row['PANNo'] ?>" class="btn btn-primary">Delete</a></td>
+                                        <td><a href="deletesupplier.php?pan=<?php echo $row['PANNo'] ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this supplier?');">Delete</a></td>
                                         </tr>
                                         <?php
                                         }

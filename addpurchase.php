@@ -12,35 +12,49 @@
  }
 
  if ($_SERVER['REQUEST_METHOD']=='POST'){     
-    $date=$_POST['dob'];      
+    $date = $_POST['dob'];  
     $product_code=$_POST['product_code'];
     $quantity=$_POST['quantity'];
     $pay_status=$_POST['pay_status'];
     
+    
+    $select_sql = "SELECT 
+                p.ProductCode,
+                p.ProductName,
+                s.`Supplier-PAN` AS Supplier_PAN, 
+                p.Cost,
+                p.Price,
+                p.Cost * $quantity AS PurchaseAmount
+            FROM product p
+            JOIN supplier s ON p.`Supplier-PAN` = s.`Supplier-PAN`
+            WHERE p.ProductCode = '$product_code'";
 
+    $result = mysqli_query($conn, $select_sql);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $purchase_amount = $row['PurchaseAmount'];
+        $supplier_pan = $row['Supplier_PAN'];
 
-    // $sql="SELECT * FROM `purchase` WHERE PANNo='$pan' ";
-    // $result=mysqli_query($conn,$sql);
-    // $num=mysqli_num_rows($result);
+        // Insert into the purchase table
+        $sql = "INSERT INTO `purchase` (`Date`, `ProductCode`, `Quantity`, `PaymentStatus`, `PurchaseAmount`, `Supplier-PAN`) 
+                       VALUES ('$date', '$product_code', '$quantity', '$pay_status', '$purchase_amount', '$supplier_pan')";
 
-    // if($num>0) {
-    //     $_SESSION['error'] = $supplier. " already exists! ";
-    //     header("Location: page-add-supplier.html");
-    //     exit();    
-    // }
-
-    $sql="INSERT INTO `purchase` (`Date`, `ProductCode`, `Quantity`, `PaymentStatus`) VALUES ('$date', '$product_code', '$quantity', '$pay_status')";
+   
     if (mysqli_query($conn, $sql)) {
-        $_SESSION['success'] = "Purchase added."; //Alert message is generated in login page
+        $update_sql = "UPDATE `product` SET Quantity = Quantity + $quantity WHERE ProductCode = '$product_code'";
+        mysqli_query($conn, $update_sql);
+        $_SESSION['success'] = "Purchase added & stock updated"; //Alert message is generated in login page
         header("Location: page-list-purchase.php");
         exit();
         }
-        
+
         else {
         $_SESSION['error'] = "Something went wrong. Please try again.";
-        header("Location: page-add-purchase.html");
+        header("Location: page-add-purchase.php");
         exit();
         }   
+    }
+
+
 
  }
 ?>
