@@ -42,13 +42,13 @@
     if (mysqli_query($conn, $sql)) {
         $update_sql = "UPDATE `product` SET Quantity = Quantity + $quantity WHERE ProductCode = '$product_code'";
         mysqli_query($conn, $update_sql);
-        $_SESSION['success'] = "Purchase added & stock updated"; //Alert message is generated in login page
+        $_SESSION['success'] = "Purchase record added & stock updated successfully!"; //Alert message is generated in login page
         header("Location: page-list-purchase.php");
         exit();
         }
 
         else {
-        $_SESSION['error'] = "Something went wrong. Please try again.";
+        $_SESSION['error'] = "Something went wrong! Please try again.";
         header("Location: page-add-purchase.php");
         exit();
         }   

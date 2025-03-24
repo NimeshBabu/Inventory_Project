@@ -1,3 +1,12 @@
+<?php
+require_once('config/db.php');
+$query = "select * from `sales`";
+$result = mysqli_query($con, $query);
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -13,10 +22,44 @@
     <link rel="stylesheet" href="./vendor/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="./vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
     <link rel="stylesheet" href="./vendor/remixicon/fonts/remixicon.css">
+
+    <style>
+        /* Custom colors for payment status */
+        .payment-status {
+            border: none;
+            padding: 6px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size:0.75rem;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .paid {
+            background-color: rgb(6, 151, 6);
+            color: white;
+        }
+
+        .unpaid {
+            background-color: rgb(216, 2, 9);
+            color: white;
+        }
+
+        .due {
+            background-color: #908f8f;
+            color: white;
+        }
+
+        .payment-status:hover {
+            opacity: 0.9;
+        }
+    </style>
+
+
 </head>
 
 <body class="  ">
-    
+<div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -100,12 +143,12 @@
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="active">
-                                    <a href="./page-list-sale.html">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
                                 <li class=" ">
-                                    <a href="./page-add-sale.html">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -284,7 +327,7 @@
                                 <h4 class="mb-3">Sale List</h4>
                                 
                             </div>
-                            <a href="./page-add-sale.html" class="btn btn-primary add-list"><i
+                            <a href="./page-add-sale.php" class="btn btn-primary add-list"><i
                                     class="las la-plus mr-3"></i>Add Sale</a>
                         </div>
                     </div>
@@ -301,126 +344,43 @@
                                         <th>Quantity</th>
                                         <th>Sold Amount</th>
                                         <th>Payment Status</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody class="ligth-body">
                                     <tr>
-                                        <td>01 jan 2020</td>
-                                        <td></td>
-                                        <td>Bill Yerds</td>
-                                        <td></td>
-                                        <td>Yerds</td>
-                                        <td></td>
-                                        <td>38.50</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
+                                        <?php
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <td><?php echo $row['Date']; ?></td>
+                                            <td><?php echo $row['ProductCode']; ?></td>
+                                            <td><?php echo $row['Customer']; ?></td>
+                                            <td><?php echo $row['ShippingAddress']; ?></td>
+                                            <td><?php echo $row['Biller']; ?></td>
+                                            <td><?php echo $row['Quantity']; ?></td>
+                                            <td><?php echo $row['SalesAmount']; ?></td>
+                                            <td>
+                                            <form method="post" action="updatesale.php">
+                                                <input type="hidden" name="sale_id" value="<?php echo $row['SaleID']; ?>">
+                                                <select name="payment_status" class="payment-status 
+                                                    <?php echo strtolower($row['PaymentStatus']); ?>"
+                                                    onchange="this.form.submit()">
+                                                    <option value="Paid" <?php echo $row['PaymentStatus'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
+                                                    <option value="Unpaid" <?php echo $row['PaymentStatus'] === 'Unpaid' ? 'selected' : ''; ?>>Unpaid</option>
+                                                    <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
+                                                </select>
+                                            </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" action="deletesale.php" style="display:inline;">
+                                                    <input type="hidden" name="sale_id" id="sale_id" value="<?php echo $row['SaleID']; ?>">
+                                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this sale record?');">Delete</button>
+                                                </form>
+                                                </>
                                     </tr>
-
-                                    <tr>
-                                        <td>03 jan 2020</td>
-                                        <td></td>
-                                        <td>Anna Sthesia</td>
-                                        <td></td>
-                                        <td>Sthesia</td>
-                                        <td></td>
-                                        <td>40.50</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>05 jan 2020</td>
-                                        <td></td>
-                                        <td>Paul Molive</td>
-                                        <td></td>
-                                        <td>Molive</td>
-                                        <td></td>
-                                        <td>50.00</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>15 jan 2020</td>
-                                        <td></td>
-                                        <td>Anna Mull</td>
-                                        <td></td>
-                                        <td>Anna</td>
-                                        <td></td>
-                                        <td>85.50</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>24 jan 2020</td>
-                                        <td></td>
-                                        <td>Paige Turner</td>
-                                        <td></td>
-                                        <td>Turner</td>
-                                        <td></td>
-                                        <td>38.50</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>09 Feb 2020</td>
-                                        <td></td>
-                                        <td>Bob Frapples</td>
-                                        <td></td>
-                                        <td>Frapples</td>
-                                        <td></td>
-                                        <td>48.50</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>25 feb 2020</td>
-                                        <td></td>
-                                        <td>Barb Ackue</td>
-                                        <td></td>
-                                        <td>Ackue</td>
-                                        <td></td>
-                                        <td>58.50</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>28 feb 2020</td>
-                                        <td></td>
-                                        <td>Greta Life</td>
-                                        <td></td>
-                                        <td>Yerds</td>
-                                        <td></td>
-                                        <td>60.45</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>05 Mar 2020</td>
-                                        <td></td>
-                                        <td>Pete Sariya</td>
-                                        <td></td>
-                                        <td>Sariya</td>
-                                        <td></td>
-                                        <td>52.48</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                        
-                                    </tr>
+                                <?php
+                                        }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
@@ -440,7 +400,7 @@
     <!-- Table Treeview JavaScript -->
     <script src="./js/table-treeview.js"></script>
 
-
+    <script src="./js/login_signup.js"></script>
 
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>

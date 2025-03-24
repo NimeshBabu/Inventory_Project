@@ -109,12 +109,12 @@
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class=" ">
-                                    <a href="./page-list-sale.html">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
                                 <li class=" ">
-                                    <a href="./page-add-sale.html">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -340,8 +340,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="pay_status">Payment Status</label>
-                                                <select name="pay_status" id="pay_status" class="form-control">
+                                                <label for="pay_status">Payment Status *</label>
+                                                <select name="pay_status" id="pay_status" class="form-control" required>
                                                     <option value="" disabled selected>Select Payment Status</option>
                                                     <option value="paid">Paid</option>
                                                     <option value="unpaid">Unpaid</option>

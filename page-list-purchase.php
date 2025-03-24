@@ -22,10 +22,45 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" href="./vendor/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="./vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
     <link rel="stylesheet" href="./vendor/remixicon/fonts/remixicon.css">
+
+    <style>
+        /* Custom colors for payment status */
+        .payment-status {
+            border: none;
+            padding: 6px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size:0.75rem;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .paid {
+            background-color: rgb(6, 151, 6);
+            color: white;
+        }
+
+        .unpaid {
+            background-color: rgb(216, 2, 9);
+            color: white;
+        }
+
+        .due {
+            background-color: #908f8f;
+            color: white;
+        }
+
+        .payment-status:hover {
+            opacity: 0.9;
+        }
+    </style>
+
+
+
 </head>
 
 <body class="  ">
-
+<div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -109,12 +144,12 @@ $result = mysqli_query($con, $query);
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="./page-list-sale.html">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="./page-add-sale.html">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -322,33 +357,25 @@ $result = mysqli_query($con, $query);
                                             <td><?php echo $row['Quantity']; ?></td>
                                             <td><?php echo $row['PurchaseAmount']; ?></td>
                                             <td>
-                                                <?php
-                                                $status = $row['PaymentStatus'];
-                                                if ($status === 'Paid') {
-                                                    echo "<span class='badge' style='background:rgb(6, 151, 6); color:white; font-weight: bold;'>Paid</span>";
-
-                                                } elseif ($status === 'Unpaid') {
-                                                    echo "<span class='badge' style='background:rgb(216, 2, 9); color:white; font-weight: bold;'>Unpaid</span>";
-
-
-                                                } elseif ($status === 'Due') {
-                                                    echo "<span class='badge' style='background: #908f8f; color:white; font-weight: bold;'>Due</span>";
-
-
-                                                }
-                                                ?>
+                                            <form method="post" action="updatepurchase.php">
+                                                <input type="hidden" name="purchase_id" value="<?php echo $row['PurchaseID']; ?>">
+                                                <select name="payment_status" class="payment-status 
+                                                    <?php echo strtolower($row['PaymentStatus']); ?>"
+                                                    onchange="this.form.submit()">
+                                                    <option value="Paid" <?php echo $row['PaymentStatus'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
+                                                    <option value="Unpaid" <?php echo $row['PaymentStatus'] === 'Unpaid' ? 'selected' : ''; ?>>Unpaid</option>
+                                                    <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
+                                                </select>
+                                            </form>
                                             </td>
-
-
-
-
-
                                             <td>
                                                 <form method="post" action="deletepurchase.php" style="display:inline;">
                                                     <input type="hidden" name="purchase_id" id="purchase_id" value="<?php echo $row['PurchaseID']; ?>">
-                                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this purchase?');">Delete</button>
+                                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this purchase record?');">Delete</button>
                                                 </form>
-                                                </>
+                                               
+
+                                            </td>
                                     </tr>
                                 <?php
                                         }
@@ -375,7 +402,7 @@ $result = mysqli_query($con, $query);
     <script src="./js/table-treeview.js"></script>
 
 
-
+    <script src="./js/login_signup.js"></script>
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
 </body>

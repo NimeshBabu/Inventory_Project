@@ -8,9 +8,9 @@ if (isset($_POST['purchase_id'])) {
     // Perform the deletion using PurchaseID
     $delete_sql = "DELETE FROM purchase WHERE PurchaseID = '$purchase_id'";
     if (mysqli_query($con, $delete_sql)) {
-        $_SESSION['success'] = "Purchase deleted successfully.";
+        $_SESSION['success'] = "Purchase record deleted successfully!";
     } else {
-        $_SESSION['error'] = "Failed to delete purchase: " ;
+        $_SESSION['error'] = "Failed to delete purchase record! " ;
     }
 }
 

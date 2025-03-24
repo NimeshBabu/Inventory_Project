@@ -1,3 +1,12 @@
+<?php
+ require_once('config/db.php');
+ $query= "select * from product";
+ $result= mysqli_query($con,$query);
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -18,6 +27,7 @@
 <body class="  ">
     
     <!-- Wrapper Start -->
+    <div id="alert-container"></div>
     <div class="wrapper">
 
         <div class="iq-sidebar  sidebar-default ">
@@ -100,12 +110,12 @@
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class=" ">
-                                    <a href="./page-list-sale.html">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="./page-add-sale.html">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -285,7 +295,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="./page-list-returns.html" data-toggle="validator">
+                                <form action="addsale.php" data-toggle="validator" method="POST">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -297,59 +307,66 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Product Code *</label>
-                                                    <select name="type" class="selectpicker form-control" data-style="py-0"  required>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                    </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Customer *</label>
-                                                <select name="type" class="selectpicker form-control" data-style="py-0" required>
-                                                    <option>Customer name</option>
-                                                    <option>Customer name</option>
-                                                    <option>Customer name</option>
-                                                    <option>Customer name</option>
+                                                <select class="form-control" name="product_code" id="product_code" required>
+                                                    <option value="" disabled selected>Select Product Code</option>
+                                                    <?php
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" . htmlspecialchars($row['ProductCode']) . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value=''>No Product Code available</option>";
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
+                                        <?php
+                                        $con->close();
+                                        ?>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Shipping Address *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Shipping Address" required>
+                                                <label>Customer *</label>
+                                                <input type="text" class="form-control" placeholder="Enter Customer" name="customer" id="customer" required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Biller *</label>
-                                                <select name="type" class="selectpicker form-control" data-style="py-0" required>
-                                                    <option>Test Biller</option>
-                                                    <option>Test Biller</option>
-                                                    <option>Test Biller</option>
-                                                    <option>Test Biller</option>
-                                                    <option>Test Biller</option>
-
+                                                <label>Shipping Address *</label>
+                                                <input type="text" class="form-control" placeholder="Enter Shipping Address" name="ship_add" id="ship_add" required>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label for="biller">Biller *</label>
+                                                <select name="biller" id="biller" class="form-control"  required>
+                                                    <option value="" disabled selected>Select Biller</option>
+                                                    <option >Biller A</option>
+                                                    <option >Biller B</option>
+                                                    <option >Biller C</option>
+                                                    <option >Biller D</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Quantity *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Quantity"
+                                                <input type="text" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity"
                                                     required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Payment Status *</label>
-                                                <select name="type" class="selectpicker form-control" data-style="py-0" required>
-                                                    <option>Paid</option>
-                                                    <option>Unpaid</option>
+                                            <label for="pay_status">Payment Status *</label>
+                                                <select name="pay_status" id="pay_status" class="form-control" name="pay_status" id="pay_status" required>
+                                                    <option value="" disabled selected>Select Payment Status</option>
+                                                    <option value="paid">Paid</option>
+                                                    <option value="unpaid">Unpaid</option>
+                                                    <option value="due">Due</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -382,6 +399,7 @@
 
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
+    <script src="./js/login_signup.js"></script>
 </body>
 
 </html>
