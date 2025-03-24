@@ -170,7 +170,7 @@
                             </a>
                             <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="active">
-                                    <a href="./page-list-suppliers.html">
+                                    <a href="./page-list-suppliers.php">
                                         <i class="las la-minus"></i><span>List Suppliers</span>
                                     </a>
                                 </li>

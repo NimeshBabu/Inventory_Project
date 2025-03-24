@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS Purchase (
     Quantity INT NOT NULL CHECK (Quantity > 0),
     PurchaseAmount DECIMAL(10,2) NOT NULL,
     PaymentStatus ENUM('Paid', 'Unpaid', 'Due'),
-    SupplierID INT,
+    Supplier VARCHAR(50),
     FOREIGN KEY (ProductCode) REFERENCES Product(ProductCode)
     ON UPDATE CASCADE ON DELETE CASCADE
 );

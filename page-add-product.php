@@ -1,3 +1,20 @@
+<?php
+// Database connection
+$con=mysqli_connect(hostname: "localhost",username: "root",password: "", database: "inventrix");
+
+if (!$con){
+    die("Sorry we failed to connect: ".mysqli_connect_error()); 
+}
+
+// Fetch supplier data
+$sql = "SELECT `Supplier-PAN` FROM `supplier`";
+$result = $con->query(query: $sql);
+?>
+
+
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -16,7 +33,7 @@
 </head>
 
 <body class="  ">
-    
+
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -113,25 +130,33 @@
                         </li>
                         <li class=" ">
                             <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                     <line x1="1" y1="10" x2="23" y2="10"></line>
                                 </svg>
                                 <span class="ml-4">Purchases</span>
-                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                            <a href="./page-list-purchase.html">
-                                                <i class="las la-minus"></i><span>List Purchases</span>
-                                            </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="./page-add-purchase.html">
-                                            <i class="las la-minus"></i><span>Add purchase</span>
-                                        </a>
-                                    </li>
+                                <li class="">
+                                    <a href="./page-list-purchase.html">
+                                        <i class="las la-minus"></i><span>List Purchases</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="./page-add-purchase.html">
+                                        <i class="las la-minus"></i><span>Add purchase</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class=" ">
@@ -167,7 +192,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
 
 
                     </ul>
@@ -228,7 +253,7 @@
                                         </svg>
                                         <span class="bg-primary"></span>
                                     </a>
-                                    
+
                                 </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
@@ -302,14 +327,31 @@
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
+
+
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Supplier *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Supplier"
-                                                    required>
+                                                <label>Supplier-PAN *</label>
+                                                <select class="form-control" name="supplier_pan" required>
+                                                    <option value="" disabled selected>Select Supplier-PAN</option>
+                                                    <?php
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . htmlspecialchars($row['Supplier-PAN']) . "'>" . htmlspecialchars($row['Supplier-PAN']) . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value=''>No Supplier-PAN available</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
+
+                                        <?php
+                                        $con->close();
+                                        ?>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Cost *</label>
@@ -336,7 +378,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Description / Product Details</label>
-                                                <textarea class="form-control"  maxlength="30"></textarea>
+                                                <textarea class="form-control" maxlength="30"></textarea>
                                             </div>
                                         </div>
                                     </div>
