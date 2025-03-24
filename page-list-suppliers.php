@@ -81,12 +81,12 @@
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="./page-list-product.html">
+                                    <a href="./page-list-product.php">
                                         <i class="las la-minus"></i><span>List Product</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="./page-add-product.html">
+                                    <a href="./page-add-product.php">
                                         <i class="las la-minus"></i><span>Add Product</span>
                                     </a>
                                 </li>
@@ -135,12 +135,12 @@
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class=" ">
-                                            <a href="./page-list-purchase.html">
+                                            <a href="./page-list-purchase.php">
                                                 <i class="las la-minus"></i><span>List Purchases</span>
                                             </a>
                                     </li>
                                     <li class="">
-                                        <a href="./page-add-purchase.html">
+                                        <a href="./page-add-purchase.php">
                                             <i class="las la-minus"></i><span>Add purchase</span>
                                         </a>
                                     </li>
@@ -309,7 +309,7 @@
                                 <thead class="bg-white text-uppercase">
                                     <tr class="ligth ligth-data">
                                         
-                                        <th>Company Name</th>
+                                        <th>Supplier</th>
                                         <th>E-mail</th>
                                         <th>Phone Number</th>
                                         <th>Address</th>
@@ -328,7 +328,7 @@
                                         <td><?php echo $row['PhoneNo']; ?></td>
                                         <td><?php echo $row['Address']; ?></td>
                                         <td><?php echo $row['PANNo']; ?></td>
-                                        <td><a href="deletesupplier.php?pan=<?php echo $row['PANNo'] ?>" class="btn btn-primary">Delete</a></td>
+                                        <td><a href="deletesupplier.php?pan=<?php echo $row['PANNo'] ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this supplier?');">Delete</a></td>
                                         </tr>
                                         <?php
                                         }

@@ -1,3 +1,12 @@
+<?php
+ require_once('config/db.php');
+ $query= "select * from product";
+ $result= mysqli_query($con,$query);
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -18,6 +27,7 @@
 <body class="  ">
     <div id="alert-container"></div>
     <!-- Wrapper Start -->
+    <div id="alert-container"></div>
     <div class="wrapper">
 
         <div class="iq-sidebar  sidebar-default ">
@@ -69,12 +79,12 @@
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="./page-list-product.html">
+                                    <a href="./page-list-product.php">
                                         <i class="las la-minus"></i><span>List Product</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="./page-add-product.html">
+                                    <a href="./page-add-product.php">
                                         <i class="las la-minus"></i><span>Add Product</span>
                                     </a>
                                 </li>
@@ -123,12 +133,12 @@
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                     <li class="">
-                                            <a href="./page-list-purchase.html">
+                                            <a href="./page-list-purchase.php">
                                                 <i class="las la-minus"></i><span>List Purchases</span>
                                             </a>
                                     </li>
                                     <li class="active">
-                                        <a href="./page-add-purchase.html">
+                                        <a href="./page-add-purchase.php">
                                             <i class="las la-minus"></i><span>Add purchase</span>
                                         </a>
                                     </li>
@@ -286,7 +296,11 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="./page-list-purchase.html" data-toggle="validator">
+                                <form action="addpurchase.php" data-toggle="validator" method="POST">
+
+                                
+
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -298,31 +312,47 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Product Code *</label>
-                                                    <select name="type" class="selectpicker form-control" data-style="py-0"  required>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                    </select>
+                                                <select class="form-control" name="product_code" id="product_code" required>
+                                                    <option value="" disabled selected>Select Product Code</option>
+                                                    <?php
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" . htmlspecialchars($row['ProductCode']) . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value=''>No Product Code available</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
+
+                                        <?php
+                                        $con->close();
+                                        ?>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Quantity *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Quantity"
+                                                <input type="text" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity"
                                                     required>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Payment Status</label>
-                                                <select name="type" class="selectpicker form-control" data-style="py-0">
-                                                    <option>Paid</option>
-                                                    <option>Unpaid</option>
+                                                <label for="pay_status">Payment Status</label>
+                                                <select name="pay_status" id="pay_status" class="form-control">
+                                                    <option value="" disabled selected>Select Payment Status</option>
+                                                    <option value="paid">Paid</option>
+                                                    <option value="unpaid">Unpaid</option>
+                                                    <option value="due">Due</option>
                                                 </select>
                                             </div>
                                         </div>
+
+
+                                        
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-2">Add Purchase</button>
                                     <button type="reset" class="btn btn-danger">Reset</button>

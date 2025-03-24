@@ -11,7 +11,7 @@
 :root {
   --iq-primary: #32BDEA;
   --iq-secondary: #FF7E41;
-  --iq-success: #78C091;
+  --iq-success: #6dbe8a;
   --iq-info: #7EE2FF;
   --iq-warning: #FF9770;
   --iq-danger: #E08DB4;
@@ -32,7 +32,11 @@
   --iq-orange: #FF7E41;
   --iq-purple: #4731b6;
   --iq-skyblue: #158df7;
-  --iq-light-gray: #f4f5fa; }
+  --iq-light-gray: #f4f5fa;
+  --iq-paid: #1d9b0f;
+  --iq-unpaid: #a91515;
+  --iq-due: #a4a5a9;
+}
 
 :root {
   --blue: #32BDEA;
@@ -3317,10 +3321,10 @@ textarea.form-control {
 
 .badge-success {
   color: #fff;
-  background-color: #78C091; }
+  background-color: #0e8d3a; }
   a.badge-success:hover, a.badge-success:focus {
     color: #fff;
-    background-color: #55b075; }
+    background-color: #0e8d3a; }
   a.badge-success:focus, a.badge-success.focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(120, 192, 145, 0.5); }
@@ -3337,10 +3341,10 @@ textarea.form-control {
 
 .badge-warning {
   color: #fff;
-  background-color: #FF9770; }
+  background-color: #a30f0f; }
   a.badge-warning:hover, a.badge-warning:focus {
     color: #fff;
-    background-color: #ff723d; }
+    background-color: #a30f0f; }
   a.badge-warning:focus, a.badge-warning.focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(255, 151, 112, 0.5); }
