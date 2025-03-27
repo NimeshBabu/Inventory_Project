@@ -26,7 +26,7 @@
             $row=mysqli_fetch_assoc($result);
                 if(password_verify($pass, $row['password'])){    //extracts salt form stored hash and uses it to hash the entered password and then compares it with the stored hash
                     $_SESSION['success'] = "Logged in successfully!";
-                    header("Location: dashboard.html");
+                    header("Location: dashboard_html.php");
                     exit();
                 }
         

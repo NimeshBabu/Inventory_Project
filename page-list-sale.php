@@ -1,3 +1,12 @@
+<?php
+require_once('config/db.php');
+$query = "select * from `sales`";
+$result = mysqli_query($con, $query);
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -13,16 +22,50 @@
     <link rel="stylesheet" href="./vendor/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="./vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
     <link rel="stylesheet" href="./vendor/remixicon/fonts/remixicon.css">
+
+    <style>
+        /* Custom colors for payment status */
+        .payment-status {
+            border: none;
+            padding: 6px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size:0.75rem;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .paid {
+            background-color: rgb(6, 151, 6);
+            color: white;
+        }
+
+        .unpaid {
+            background-color: rgb(216, 2, 9);
+            color: white;
+        }
+
+        .due {
+            background-color: #908f8f;
+            color: white;
+        }
+
+        .payment-status:hover {
+            opacity: 0.9;
+        }
+    </style>
+
+
 </head>
 
 <body class="  ">
-    <div id="alert-container"></div>
+<div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                <a href="./dashboard.html" class="header-logo">
+                <a href="./dashboard_html.php" class="header-logo">
                     <img src="./assets/Logoup.svg" class="logo-title light-logo ml-3" alt="logo">
                     <!-- <h5 class="logo-title light-logo ml-3">POSDash</h5> -->
                 </a>
@@ -34,7 +77,7 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class=" ">
-                            <a href="./dashboard.html" class="svg-icon">
+                            <a href="./dashboard_html.php" class="svg-icon">
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -99,13 +142,13 @@
                                 </svg>
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class=" ">
-                                    <a href="./page-list-sale.html">
+                                <li class="active">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
-                                <li class="active">
-                                    <a href="./page-add-sale.html">
+                                <li class=" ">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -181,7 +224,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
-                        <a href="./dashboard.html" class="header-logo">
+                        <a href="./dashboard_html.php" class="header-logo">
                             <img src="./assets/Logoup.svg" class="logo-title ml-3" alt="logo">
 
                         </a>
@@ -274,92 +317,72 @@
                 </nav>
             </div>
         </div>
+        
         <div class="content-page">
-            <div class="container-fluid add-form-list">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between">
-                                <div class="header-title">
-                                    <h4 class="card-title">Add Sale</h4>
-                                </div>
+                    <div class="col-lg-12">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+                            <div>
+                                <h4 class="mb-3">Sale List</h4>
+                                
                             </div>
-                            <div class="card-body">
-                                <form action="./page-list-returns.html" data-toggle="validator">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Date *</label>
-                                                <input type="date" class="form-control" id="dob" name="dob" required>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Product Code *</label>
-                                                    <select name="type" class="selectpicker form-control" data-style="py-0"  required>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                        <option>Codee</option>
-                                                    </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Customer *</label>
-                                                <select name="type" class="selectpicker form-control" data-style="py-0" required>
-                                                    <option>Customer name</option>
-                                                    <option>Customer name</option>
-                                                    <option>Customer name</option>
-                                                    <option>Customer name</option>
+                            <a href="./page-add-sale.php" class="btn btn-primary add-list"><i
+                                    class="las la-plus mr-3"></i>Add Sale</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="table-responsive rounded mb-3">
+                            <table class="data-tables table mb-0 tbl-server-info">
+                                <thead class="bg-white text-uppercase">
+                                    <tr class="ligth ligth-data">
+                                        <th>Date</th>
+                                        <th>Product Code</th>
+                                        <th>Customer</th>
+                                        <th>Shipping Address</th>
+                                        <th>Biller</th>
+                                        <th>Quantity</th>
+                                        <th>Sold Amount</th>
+                                        <th>Payment Status</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ligth-body">
+                                    <tr>
+                                        <?php
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <td><?php echo $row['Date']; ?></td>
+                                            <td><?php echo $row['ProductCode']; ?></td>
+                                            <td><?php echo $row['Customer']; ?></td>
+                                            <td><?php echo $row['ShippingAddress']; ?></td>
+                                            <td><?php echo $row['Biller']; ?></td>
+                                            <td><?php echo $row['Quantity']; ?></td>
+                                            <td><?php echo $row['SalesAmount']; ?></td>
+                                            <td>
+                                            <form method="post" action="updatesale.php">
+                                                <input type="hidden" name="sale_id" value="<?php echo $row['SaleID']; ?>">
+                                                <select name="payment_status" class="payment-status 
+                                                    <?php echo strtolower($row['PaymentStatus']); ?>"
+                                                    onchange="this.form.submit()">
+                                                    <option value="Paid" <?php echo $row['PaymentStatus'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
+                                                    <option value="Unpaid" <?php echo $row['PaymentStatus'] === 'Unpaid' ? 'selected' : ''; ?>>Unpaid</option>
+                                                    <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Shipping Address *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Shipping Address" required>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Biller *</label>
-                                                <select name="type" class="selectpicker form-control" data-style="py-0" required>
-                                                    <option>Test Biller</option>
-                                                    <option>Test Biller</option>
-                                                    <option>Test Biller</option>
-                                                    <option>Test Biller</option>
-                                                    <option>Test Biller</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Quantity *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Quantity"
-                                                    required>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Payment Status *</label>
-                                                <select name="type" class="selectpicker form-control" data-style="py-0" required>
-                                                    <option>Paid</option>
-                                                    <option>Unpaid</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mr-2">Add Sale</button>
-                                    <button type="reset" class="btn btn-danger">Reset</button>
-                                </form>
-                            </div>
+                                            </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" action="deletesale.php" style="display:inline;">
+                                                    <input type="hidden" name="sale_id" id="sale_id" value="<?php echo $row['SaleID']; ?>">
+                                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this sale record?');">Delete</button>
+                                                </form>
+                                                </>
+                                    </tr>
+                                <?php
+                                        }
+                                ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -368,17 +391,16 @@
         </div>
     </div>
     <!-- Wrapper End-->
-   
 
 
-
+    
     <!-- Backend Bundle JavaScript -->
     <script src="./js/backend-bundle.min.js"></script>
 
     <!-- Table Treeview JavaScript -->
     <script src="./js/table-treeview.js"></script>
 
-
+    <script src="./js/login_signup.js"></script>
 
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>

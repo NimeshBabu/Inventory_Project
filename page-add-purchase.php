@@ -32,7 +32,7 @@
 
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                <a href="./dashboard.html" class="header-logo">
+                <a href="./dashboard_html.php" class="header-logo">
                     <img src="./assets/Logoup.svg" class="logo-title light-logo ml-3" alt="logo">
                     <!-- <h5 class="logo-title light-logo ml-3">POSDash</h5> -->
                 </a>
@@ -44,7 +44,7 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class=" ">
-                            <a href="./dashboard.html" class="svg-icon">
+                            <a href="./dashboard_html.php" class="svg-icon">
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -110,12 +110,12 @@
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class=" ">
-                                    <a href="./page-list-sale.html">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
                                 <li class=" ">
-                                    <a href="./page-add-sale.html">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -191,7 +191,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
-                        <a href="./dashboard.html" class="header-logo">
+                        <a href="./dashboard_html.php" class="header-logo">
                             <img src="./assets/Logoup.svg" class="logo-title ml-3" alt="logo">
 
                         </a>
@@ -341,8 +341,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="pay_status">Payment Status</label>
-                                                <select name="pay_status" id="pay_status" class="form-control">
+                                                <label for="pay_status">Payment Status *</label>
+                                                <select name="pay_status" id="pay_status" class="form-control" required>
                                                     <option value="" disabled selected>Select Payment Status</option>
                                                     <option value="paid">Paid</option>
                                                     <option value="unpaid">Unpaid</option>

@@ -1,3 +1,7 @@
+<?php
+include "dashboard.php";
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -16,13 +20,12 @@
 </head>
 
 <body class="  ">
-    
     <!-- Wrapper Start -->
     <div class="wrapper">
 
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                <a href="./dashboard.html" class="header-logo">
+                <a href="./dashboard_html.php" class="header-logo">
                     <img src="./assets/Logoup.svg" class="logo-title light-logo ml-3" alt="logo">
                     <!-- <h5 class="logo-title light-logo ml-3">POSDash</h5> -->
                 </a>
@@ -33,8 +36,8 @@
             <div class="data-scrollbar" data-scroll="1">
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
-                        <li class=" ">
-                            <a href="./dashboard.html" class="svg-icon">
+                        <li class="active">
+                            <a href="./dashboard_html.php" class="svg-icon">
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -99,13 +102,13 @@
                                 </svg>
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="active">
-                                    <a href="./page-list-sale.html">
+                                <li class="">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
-                                <li class=" ">
-                                    <a href="./page-add-sale.html">
+                                <li class="">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -132,7 +135,6 @@
                                             <i class="las la-minus"></i><span>Add purchase</span>
                                         </a>
                                     </li>
-
                             </ul>
                         </li>
                         <li class=" ">
@@ -181,7 +183,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
-                        <a href="./dashboard.html" class="header-logo">
+                        <a href="./dashboard_html.php" class="header-logo">
                             <img src="./assets/Logoup.svg" class="logo-title ml-3" alt="logo">
 
                         </a>
@@ -274,177 +276,267 @@
                 </nav>
             </div>
         </div>
-        
         <div class="content-page">
-            <div class="container-fluid">
+            <div class="container-fluid ">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <div>
-                                <h4 class="mb-3">Sale List</h4>
-                                
-                            </div>
-                            <a href="./page-add-sale.html" class="btn btn-primary add-list"><i
-                                    class="las la-plus mr-3"></i>Add Sale</a>
+                    <div class="col-lg-6 mb-4 back">
+                        <div class="mb-3 p-3 rounded">
+                            <h2 class="text-dark ">Hi User,<br>Welcome Back!</h2>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="table-responsive rounded mb-3">
-                            <table class="data-tables table mb-0 tbl-server-info">
-                                <thead class="bg-white text-uppercase">
-                                    <tr class="ligth ligth-data">
-                                        <th>Date</th>
-                                        <th>Product Code</th>
-                                        <th>Customer</th>
-                                        <th>Shipping Address</th>
-                                        <th>Biller</th>
-                                        <th>Quantity</th>
-                                        <th>Sold Amount</th>
-                                        <th>Payment Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="ligth-body">
-                                    <tr>
-                                        <td>01 jan 2020</td>
-                                        <td></td>
-                                        <td>Bill Yerds</td>
-                                        <td></td>
-                                        <td>Yerds</td>
-                                        <td></td>
-                                        <td>38.50</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <td>03 jan 2020</td>
-                                        <td></td>
-                                        <td>Anna Sthesia</td>
-                                        <td></td>
-                                        <td>Sthesia</td>
-                                        <td></td>
-                                        <td>40.50</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
+                    <div class="col-lg-6 mb-4 ">
+                        <div class="row mt-5">
 
-                                    <tr>
-                                        <td>05 jan 2020</td>
-                                        <td></td>
-                                        <td>Paul Molive</td>
-                                        <td></td>
-                                        <td>Molive</td>
-                                        <td></td>
-                                        <td>50.00</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
+                            <!-- FIrst Row -->
+                            <div class="col-lg-6 col-md-6 mb-4 ">
+                                <div class="card card-block card-stretch card-height card-1">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-4 card-total-sale">
+                                            <div
+                                                class="icon iq-icon-box-2 align-items-center justify-content-center rounded-circle bg-success-light">
+                                                <img src="./assets/Icon orders/icon_total.png " class="img-fluid"
+                                                    alt="image">
+                                            </div>
+                                            <div>
+                                                <p class="mb-2">Total Product</p>
+                                                <h4><?php 
+                                                echo $total_products;
+                                                ?>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    <tr>
-                                        <td>15 jan 2020</td>
-                                        <td></td>
-                                        <td>Anna Mull</td>
-                                        <td></td>
-                                        <td>Anna</td>
-                                        <td></td>
-                                        <td>85.50</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
+                            <div class="col-lg-6 col-md-6 mb-4">
+                                <div class="card card-block card-stretch card-height card-2 ">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-4 card-total-sale">
+                                            <div
+                                                class="icon iq-icon-box-2 bg-success-light align-items-center justify-content-center rounded-circle">
+                                                <img src="./assets/Icon orders/icon_neworder.png  " class="img-fluid"
+                                                    alt="image">
+                                            </div>
+                                            <div>
+                                                <p class="mb-2">Total Sale</p>
+                                                <h4><?php 
+                                                echo $total_sales;
+                                                ?>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    <tr>
-                                        <td>24 jan 2020</td>
-                                        <td></td>
-                                        <td>Paige Turner</td>
-                                        <td></td>
-                                        <td>Turner</td>
-                                        <td></td>
-                                        <td>38.50</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>09 Feb 2020</td>
-                                        <td></td>
-                                        <td>Bob Frapples</td>
-                                        <td></td>
-                                        <td>Frapples</td>
-                                        <td></td>
-                                        <td>48.50</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>25 feb 2020</td>
-                                        <td></td>
-                                        <td>Barb Ackue</td>
-                                        <td></td>
-                                        <td>Ackue</td>
-                                        <td></td>
-                                        <td>58.50</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>28 feb 2020</td>
-                                        <td></td>
-                                        <td>Greta Life</td>
-                                        <td></td>
-                                        <td>Yerds</td>
-                                        <td></td>
-                                        <td>60.45</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>05 Mar 2020</td>
-                                        <td></td>
-                                        <td>Pete Sariya</td>
-                                        <td></td>
-                                        <td>Sariya</td>
-                                        <td></td>
-                                        <td>52.48</td>
-                                        <td>
-                                            <div class="badge badge-success">Paid</div>
-                                        </td>
-                                        
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <!-- Second Row -->
+                            <div class="col-lg-6 col-md-6 mb-4">
+                                <div class="card card-block card-stretch card-height card-3">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-4 card-total-sale">
+                                            <div
+                                                class="icon iq-icon-box-2 bg-success-light align-items-center justify-content-center rounded-circle">
+                                                <img src="./assets/Icon orders/icon_dispatched.png"
+                                                    class="img-fluid" alt="image">
+                                            </div>
+                                            <div>
+                                            <p class="mb-2">Total Purchase</p>
+                                                <h4><?php 
+                                                echo $total_purchases;
+                                                ?>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 mb-4">
+                                <div class="card card-block card-stretch card-height card-4">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-4 card-total-sale">
+                                            <div
+                                                class="icon iq-icon-box-2 bg-success-light align-items-center justify-content-center rounded-circle">
+                                                <img src="./assets/Icon orders/icon_ delivered.png"
+                                                    class="img-fluid" alt="image">
+                                            </div>
+                                            <div>
+                                                <p class="mb-2">Total Supplier</p>
+                                                <h4><?php 
+                                                echo $total_suppliers;
+                                                ?>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- Page end  -->
+                <div class="row  d-flex align-items-stretch">
+                    <div class="col-lg-8 d-flex flex-column">
+                        <div class="card card-block card-stretch card-height  flex-grow-1">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                                <div class="header-title">
+                                    <h4 class="card-title">Top Products </h4>
+                                </div>
+                                <div class="card-header-toolbar d-flex align-items-center">
+                                        <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
+                                            This Month
+                                        </button>
+                                    </div>
+                                       
+                            </div>
+                            <?php
+// Ensure the database connection is open
+$conn = mysqli_connect("localhost", "root", "", "inventrix");
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// SQL Query to get top products
+$sql_top_products = "SELECT 
+    p.ProductName,
+    p.Quantity,
+    p.Url,
+    COUNT(s.ProductCode) as sales_count
+    FROM product p
+    LEFT JOIN sales s ON p.ProductCode = s.ProductCode
+    GROUP BY p.ProductCode
+    ORDER BY sales_count DESC
+    LIMIT 6";
+
+$result_top_products = mysqli_query($conn, $sql_top_products);
+
+// Check if the query was successful
+if (!$result_top_products) {
+    die("Query failed: " . mysqli_error($conn));
+}
+?>
+
+<div class="card-body">
+    <ul class="list-unstyled row top-product mb-0">
+        <?php while ($row = mysqli_fetch_assoc($result_top_products)) { ?>
+            <li class="col-lg-3">
+                <div class="card card-block card-stretch card-height mb-0">
+                    <div class="card-body">
+                        <div class="bg-light rounded">
+                            <img src="<?php echo !empty($row['Url']) ? $row['Url'] : './assets/images/default.png'; ?>" 
+                                 class="style-img img-fluid m-auto  object-cover h-100 w-100" alt="image" style="width: full !important; height: 200px !important; object-fit: cover; border-radius:8px;" >
+                                 
+                        </div>
+                        <div class="style-text text-left mt-3">
+                            <h5 class="mb-1"><?php echo htmlspecialchars($row['ProductName']); ?></h5>
+                            <p class="mb-0"><?php echo $row['sales_count']; ?> Items Sold</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <?php } ?>
+    </ul>
+</div>
+
+<?php
+// Close connection only after all queries are done
+mysqli_close($conn);
+?>
+
+
+<?php
+function formatNepaliCurrency($number) {
+    $exploded = explode('.', $number);
+    $intPart = $exploded[0];
+    $decimalPart = isset($exploded[1]) ? '.' . $exploded[1] : '';
+
+    // Apply Nepali currency formatting
+    $lastThree = substr($intPart, -3);
+    $remaining = substr($intPart, 0, -3);
+    
+    if ($remaining != '') {
+        $remaining = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $remaining);
+        $formattedNumber = $remaining . ',' . $lastThree;
+    } else {
+        $formattedNumber = $lastThree;
+    }
+
+    return $formattedNumber . $decimalPart;
+}
+
+$incomeFormatted = formatNepaliCurrency(number_format($income, 2, '.', ''));
+$expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
+?>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column">
+                        <div class="card card-block card-stretch card-height mb-2">
+                            <div class="card-body" style="background: url(./assets/income.svg); background-size: contain; background-position: right; background-repeat: no-repeat;">
+                                <div class="d-flex align-items-top justify-content-between">
+                                    <div>
+                                        <p class="mb-0">Income</p>
+                                        <h5>
+                                            <?php
+                                            echo "Rs. ". $incomeFormatted;
+                                            ?>
+                                        </h5>
+                                        
+                                    </div>
+                                </div>
+                                <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
+                                    This Month
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body"style="background: url(./assets/expense.svg); background-size: contain; background-position: right; background-repeat: no-repeat; ">
+                                <div class="d-flex align-items-top justify-content-between">
+                                    <div>
+                                        <p class="mb-0">Expenses</p>
+                                        <h5><?php
+                                            echo "Rs. ". $expensesFormatted;
+                                            ?></h5>                                    </div>
+                                    
+                                </div>
+                                <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
+                                    This Month
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                                   
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Page end  -->
         </div>
+    </div>
     </div>
     <!-- Wrapper End-->
 
 
-    
+
+
+
     <!-- Backend Bundle JavaScript -->
     <script src="./js/backend-bundle.min.js"></script>
 
     <!-- Table Treeview JavaScript -->
     <script src="./js/table-treeview.js"></script>
 
+    <!-- Chart Custom JavaScript -->
+
 
 
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
-    <script src="./js/login_signup.js"></script>
 </body>
 
 </html>

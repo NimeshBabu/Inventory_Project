@@ -22,16 +22,51 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" href="./vendor/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="./vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
     <link rel="stylesheet" href="./vendor/remixicon/fonts/remixicon.css">
+
+    <style>
+        /* Custom colors for payment status */
+        .payment-status {
+            border: none;
+            padding: 6px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size:0.75rem;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .paid {
+            background-color: rgb(6, 151, 6);
+            color: white;
+        }
+
+        .unpaid {
+            background-color: rgb(216, 2, 9);
+            color: white;
+        }
+
+        .due {
+            background-color: #908f8f;
+            color: white;
+        }
+
+        .payment-status:hover {
+            opacity: 0.9;
+        }
+    </style>
+
+
+
 </head>
 
 <body class="  ">
-
+<div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                <a href="./dashboard.html" class="header-logo">
+                <a href="./dashboard_html.php" class="header-logo">
                     <img src="./assets/Logoup.svg" class="logo-title light-logo ml-3" alt="logo">
                     <!-- <h5 class="logo-title light-logo ml-3">POSDash</h5> -->
                 </a>
@@ -43,7 +78,7 @@ $result = mysqli_query($con, $query);
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class=" ">
-                            <a href="./dashboard.html" class="svg-icon">
+                            <a href="./dashboard_html.php" class="svg-icon">
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -109,12 +144,12 @@ $result = mysqli_query($con, $query);
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="./page-list-sale.html">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="./page-add-sale.html">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -192,7 +227,7 @@ $result = mysqli_query($con, $query);
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
-                        <a href="./dashboard.html" class="header-logo">
+                        <a href="./dashboard_html.php" class="header-logo">
                             <img src="./assets/Logoup.svg" class="logo-title ml-3" alt="logo">
 
                         </a>
@@ -322,33 +357,25 @@ $result = mysqli_query($con, $query);
                                             <td><?php echo $row['Quantity']; ?></td>
                                             <td><?php echo $row['PurchaseAmount']; ?></td>
                                             <td>
-                                                <?php
-                                                $status = $row['PaymentStatus'];
-                                                if ($status === 'Paid') {
-                                                    echo "<span class='badge' style='background:rgb(6, 151, 6); color:white; font-weight: bold;'>Paid</span>";
-
-                                                } elseif ($status === 'Unpaid') {
-                                                    echo "<span class='badge' style='background:rgb(216, 2, 9); color:white; font-weight: bold;'>Unpaid</span>";
-
-
-                                                } elseif ($status === 'Due') {
-                                                    echo "<span class='badge' style='background: #908f8f; color:white; font-weight: bold;'>Due</span>";
-
-
-                                                }
-                                                ?>
+                                            <form method="post" action="updatepurchase.php">
+                                                <input type="hidden" name="purchase_id" value="<?php echo $row['PurchaseID']; ?>">
+                                                <select name="payment_status" class="payment-status 
+                                                    <?php echo strtolower($row['PaymentStatus']); ?>"
+                                                    onchange="this.form.submit()">
+                                                    <option value="Paid" <?php echo $row['PaymentStatus'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
+                                                    <option value="Unpaid" <?php echo $row['PaymentStatus'] === 'Unpaid' ? 'selected' : ''; ?>>Unpaid</option>
+                                                    <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
+                                                </select>
+                                            </form>
                                             </td>
-
-
-
-
-
                                             <td>
                                                 <form method="post" action="deletepurchase.php" style="display:inline;">
                                                     <input type="hidden" name="purchase_id" id="purchase_id" value="<?php echo $row['PurchaseID']; ?>">
-                                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this purchase?');">Delete</button>
+                                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this purchase record?');">Delete</button>
                                                 </form>
-                                                </>
+                                               
+
+                                            </td>
                                     </tr>
                                 <?php
                                         }
@@ -375,7 +402,7 @@ $result = mysqli_query($con, $query);
     <script src="./js/table-treeview.js"></script>
 
 
-
+    <script src="./js/login_signup.js"></script>
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
 </body>

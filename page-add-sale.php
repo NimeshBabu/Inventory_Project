@@ -1,3 +1,12 @@
+<?php
+ require_once('config/db.php');
+ $query= "select * from product";
+ $result= mysqli_query($con,$query);
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -16,12 +25,14 @@
 </head>
 
 <body class="  ">
+    <div id="alert-container"></div>
     <!-- Wrapper Start -->
+    <div id="alert-container"></div>
     <div class="wrapper">
 
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                <a href="./dashboard.html" class="header-logo">
+                <a href="./dashboard_html.php" class="header-logo">
                     <img src="./assets/Logoup.svg" class="logo-title light-logo ml-3" alt="logo">
                     <!-- <h5 class="logo-title light-logo ml-3">POSDash</h5> -->
                 </a>
@@ -32,8 +43,8 @@
             <div class="data-scrollbar" data-scroll="1">
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
-                        <li class="active">
-                            <a href="./dashboard.html" class="svg-icon">
+                        <li class=" ">
+                            <a href="./dashboard_html.php" class="svg-icon">
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -98,13 +109,13 @@
                                 </svg>
                             </a>
                             <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="">
-                                    <a href="./page-list-sale.html">
+                                <li class=" ">
+                                    <a href="./page-list-sale.php">
                                         <i class="las la-minus"></i><span>List Sale</span>
                                     </a>
                                 </li>
-                                <li class="">
-                                    <a href="./page-add-sale.html">
+                                <li class="active">
+                                    <a href="./page-add-sale.php">
                                         <i class="las la-minus"></i><span>Add Sale</span>
                                     </a>
                                 </li>
@@ -131,6 +142,7 @@
                                             <i class="las la-minus"></i><span>Add purchase</span>
                                         </a>
                                     </li>
+
                             </ul>
                         </li>
                         <li class=" ">
@@ -179,7 +191,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
-                        <a href="./dashboard.html" class="header-logo">
+                        <a href="./dashboard_html.php" class="header-logo">
                             <img src="./assets/Logoup.svg" class="logo-title ml-3" alt="logo">
 
                         </a>
@@ -273,208 +285,107 @@
             </div>
         </div>
         <div class="content-page">
-            <div class="container-fluid ">
+            <div class="container-fluid add-form-list">
                 <div class="row">
-                    <div class="col-lg-6 mb-4 back">
-                        <div class="mb-3 p-3 rounded">
-                            <h2 class="text-dark ">Hi User,<br>Welcome Back!</h2>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 mb-4 ">
-                        <div class="row mt-5">
-
-                            <!-- FIrst Row -->
-                            <div class="col-lg-6 col-md-6 mb-4 ">
-                                <div class="card card-block card-stretch card-height card-1">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-4 card-total-sale">
-                                            <div
-                                                class="icon iq-icon-box-2 align-items-center justify-content-center rounded-circle bg-success-light">
-                                                <img src="./assets/Icon orders/icon_total.png " class="img-fluid"
-                                                    alt="image">
-                                            </div>
-                                            <div>
-                                                <p class="mb-2">Total Orders</p>
-                                                <h4>2678</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 mb-4">
-                                <div class="card card-block card-stretch card-height card-2 ">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-4 card-total-sale">
-                                            <div
-                                                class="icon iq-icon-box-2 bg-success-light align-items-center justify-content-center rounded-circle">
-                                                <img src="./assets/Icon orders/icon_neworder.png  " class="img-fluid"
-                                                    alt="image">
-                                            </div>
-                                            <div>
-                                                <p class="mb-2">New Orders</p>
-                                                <h4>746</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Second Row -->
-                            <div class="col-lg-6 col-md-6 mb-4">
-                                <div class="card card-block card-stretch card-height card-3">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-4 card-total-sale">
-                                            <div
-                                                class="icon iq-icon-box-2 bg-success-light align-items-center justify-content-center rounded-circle">
-                                                <img src="./assets/Icon orders/icon_dispatched.png"
-                                                    class="img-fluid" alt="image">
-                                            </div>
-                                            <div>
-                                                <p class="mb-2">Dispatched Orders</p>
-                                                <h4>1290</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 mb-4">
-                                <div class="card card-block card-stretch card-height card-4">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-4 card-total-sale">
-                                            <div
-                                                class="icon iq-icon-box-2 bg-success-light align-items-center justify-content-center rounded-circle">
-                                                <img src="./assets/Icon orders/icon_ delivered.png"
-                                                    class="img-fluid" alt="image">
-                                            </div>
-                                            <div>
-                                                <p class="mb-2">Delivered</p>
-                                                <h4>400</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row d-flex align-items-stretch">
-                    <!-- Top Products Section (8 columns) -->
-                    <div class="col-lg-8 d-flex flex-column">
-                        <div class="card card-block card-stretch card-height flex-grow-1">
-                            <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between">
                                 <div class="header-title">
-                                    <h4 class="card-title">Top Products</h4>
+                                    <h4 class="card-title">Add Sale</h4>
                                 </div>
-                                <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
-                                    This Month
-                                </button>
                             </div>
                             <div class="card-body">
-                                <ul class="list-unstyled row top-product mb-0">
-                                    <li class="col-lg-3">
-                                        <div class="card card-block card-stretch card-height mb-0">
-                                            <div class="card-body">
-                                                <div class="bg-warning-light rounded">
-                                                    <img src="./assets/images/product/01.png" class="style-img img-fluid m-auto p-3" alt="image">
-                                                </div>
-                                                <div class="style-text text-left mt-3">
-                                                    <h5 class="mb-1">Organic Cream</h5>
-                                                    <p class="mb-0">789 Item</p>
-                                                </div>
+                                <form action="addsale.php" data-toggle="validator" method="POST">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Date *</label>
+                                                <input type="date" class="form-control" id="dob" name="dob" required>
+                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <div class="card card-block card-stretch card-height mb-0">
-                                            <div class="card-body">
-                                                <div class="bg-danger-light rounded">
-                                                    <img src="./assets/images/product/02.png" class="style-img img-fluid m-auto p-3" alt="image">
-                                                </div>
-                                                <div class="style-text text-left mt-3">
-                                                    <h5 class="mb-1">Rain Umbrella</h5>
-                                                    <p class="mb-0">657 Item</p>
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Product Code *</label>
+                                                <select class="form-control" name="product_code" id="product_code" required>
+                                                    <option value="" disabled selected>Select Product Code</option>
+                                                    <?php
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" . htmlspecialchars($row['ProductCode']) . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value=''>No Product Code available</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <div class="card card-block card-stretch card-height mb-0">
-                                            <div class="card-body">
-                                                <div class="bg-info-light rounded">
-                                                    <img src="./assets/images/product/03.png" class="style-img img-fluid m-auto p-3" alt="image">
-                                                </div>
-                                                <div class="style-text text-left mt-3">
-                                                    <h5 class="mb-1">Serum Bottle</h5>
-                                                    <p class="mb-0">489 Item</p>
-                                                </div>
+                                        <?php
+                                        $con->close();
+                                        ?>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Customer *</label>
+                                                <input type="text" class="form-control" placeholder="Enter Customer" name="customer" id="customer" required>
+                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <div class="card card-block card-stretch card-height mb-0">
-                                            <div class="card-body">
-                                                <div class="bg-success-light rounded">
-                                                    <img src="./assets/images/product/02.png" class="style-img img-fluid m-auto p-3" alt="image">
-                                                </div>
-                                                <div class="style-text text-left mt-3">
-                                                    <h5 class="mb-1">Organic Cream</h5>
-                                                    <p class="mb-0">468 Item</p>
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Shipping Address *</label>
+                                                <input type="text" class="form-control" placeholder="Enter Shipping Address" name="ship_add" id="ship_add" required>
+                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
-                                    </li>
-                                </ul>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label for="biller">Biller *</label>
+                                                <select name="biller" id="biller" class="form-control"  required>
+                                                    <option value="" disabled selected>Select Biller</option>
+                                                    <option >Biller A</option>
+                                                    <option >Biller B</option>
+                                                    <option >Biller C</option>
+                                                    <option >Biller D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Quantity *</label>
+                                                <input type="text" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity"
+                                                    required>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label for="pay_status">Payment Status *</label>
+                                                <select name="pay_status" id="pay_status" class="form-control" name="pay_status" id="pay_status" required>
+                                                    <option value="" disabled selected>Select Payment Status</option>
+                                                    <option value="paid">Paid</option>
+                                                    <option value="unpaid">Unpaid</option>
+                                                    <option value="due">Due</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mr-2">Add Sale</button>
+                                    <button type="reset" class="btn btn-danger">Reset</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                
-                    <!-- Income & Expenses Section (4 columns) -->
-                    <div class="col-lg-4 d-flex flex-column">
-                        <!-- Income Card -->
-                        <div class="card card-block card-stretch card-height mb-2">
-                            <div class="card-body d-flex flex-column" 
-                                 style="background: url(./assets/Revenue-bro.svg); background-size: contain; background-position: right; background-repeat: no-repeat; height: 100%;">
-                                <div class="flex-grow-1">
-                                    <p class="mb-0">Income</p>
-                                    <h5>$ 98,7800 K</h5>
-                                </div>
-                                <button class="btn w-100 mr-4" 
-                                        style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 12px; cursor: default;">
-                                    This Month
-                                </button>
-                            </div>
-                        </div>
-                    
-                        <!-- Expenses Card -->
-                        <div class="card card-block card-stretch card-height">
-                            <div class="card-body d-flex flex-column" 
-                                 style="background: url(./assets/expense1.svg); background-size: contain; background-position: right; background-repeat: no-repeat; height: 100%;">
-                                <div class="flex-grow-1">
-                                    <p class="mb-0">Expenses</p>
-                                    <h5>$ 45,8956 K</h5>
-                                </div>
-                                <button class="btn w-100" 
-                                        style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 12px; cursor: default;">
-                                    This Month
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    
                 </div>
-                
+                <!-- Page end  -->
             </div>
-            <!-- Page end  -->
         </div>
     </div>
-    </div>
     <!-- Wrapper End-->
-
-
+   
 
 
 
@@ -484,12 +395,11 @@
     <!-- Table Treeview JavaScript -->
     <script src="./js/table-treeview.js"></script>
 
-    <!-- Chart Custom JavaScript -->
-    <!-- <script async src="./js/chart-custom.js"></script> -->
 
 
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
+    <script src="./js/login_signup.js"></script>
 </body>
 
 </html>

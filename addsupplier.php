@@ -25,20 +25,20 @@
     $num=mysqli_num_rows($result);
 
     if($num>0) {
-        $_SESSION['error'] = $supplier. " already exists! ";
+        $_SESSION['error'] = "'" .$supplier. "' already exists! ";
         header("Location: page-add-supplier.html");
         exit();    
     }
 
     $sql="INSERT INTO `supplier` (`Supplier-PAN`, `Supplier`, `Email`, `PhoneNo`, `Address`, `PANNo`) VALUES ('$supplier-$pan','$supplier', '$email', '$phone', '$address', '$pan')";
     if (mysqli_query($conn, $sql)) {
-        $_SESSION['success'] = "Supplier added."; //Alert message is generated in login page
+        $_SESSION['success'] =  $supplier." Added Successfully!"; 
         header("Location: page-list-suppliers.php");
         exit();
         }
         
         else {
-        $_SESSION['error'] = "Something went wrong. Please try again.";
+        $_SESSION['error'] = "Something went wrong! Please try again.";
         header("Location: page-add-supplier.html");
         exit();
         }   

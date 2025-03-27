@@ -36,7 +36,7 @@
     $num=mysqli_num_rows($result);
 
     if($num>0) {
-        $_SESSION['error'] = $prod_name. " already exists! ";
+        $_SESSION['error'] = "'" .$prod_name . "' already exists in the inventory! ";
         header("Location: page-add-product.php");
         exit();    
     }
@@ -45,11 +45,11 @@
           VALUES ('$prod_code', '$prod_name', '$supplier_pan', '$cost', '$price', '$desc', '$image', '$quantity')";
     
     if (mysqli_query($conn, $sql)) {
-        $_SESSION['success'] = "Product added successfully.";
+        $_SESSION['success'] =  $prod_name . " Added Successfully!";
         header("Location: page-list-product.php");
         exit();
     } else {
-        $_SESSION['error'] = "Something went wrong. Please try again.";
+        $_SESSION['error'] = "Something went wrong! Please try again.";
         header("Location: page-add-product.php");
         exit();
     }   
