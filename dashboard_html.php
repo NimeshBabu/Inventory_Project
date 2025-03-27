@@ -1,3 +1,7 @@
+<?php
+include "dashboard.php";
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -21,7 +25,7 @@
 
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                <a href="./dashboard.html" class="header-logo">
+                <a href="./dashboard_html.php" class="header-logo">
                     <img src="./assets/Logoup.svg" class="logo-title light-logo ml-3" alt="logo">
                     <!-- <h5 class="logo-title light-logo ml-3">POSDash</h5> -->
                 </a>
@@ -33,7 +37,7 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class="active">
-                            <a href="./dashboard.html" class="svg-icon">
+                            <a href="./dashboard_html.php" class="svg-icon">
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -179,7 +183,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
-                        <a href="./dashboard.html" class="header-logo">
+                        <a href="./dashboard_html.php" class="header-logo">
                             <img src="./assets/Logoup.svg" class="logo-title ml-3" alt="logo">
 
                         </a>
@@ -295,8 +299,11 @@
                                                     alt="image">
                                             </div>
                                             <div>
-                                                <p class="mb-2">Total Orders</p>
-                                                <h4>2678</h4>
+                                                <p class="mb-2">Total Product</p>
+                                                <h4><?php 
+                                                echo $total_products;
+                                                ?>
+                                                </h4>
                                             </div>
                                         </div>
                                     </div>
@@ -313,8 +320,11 @@
                                                     alt="image">
                                             </div>
                                             <div>
-                                                <p class="mb-2">New Orders</p>
-                                                <h4>746</h4>
+                                                <p class="mb-2">Total Sale</p>
+                                                <h4><?php 
+                                                echo $total_sales;
+                                                ?>
+                                                </h4>
                                             </div>
                                         </div>
                                     </div>
@@ -332,8 +342,11 @@
                                                     class="img-fluid" alt="image">
                                             </div>
                                             <div>
-                                                <p class="mb-2">Dispatched Orders</p>
-                                                <h4>1290</h4>
+                                            <p class="mb-2">Total Purchase</p>
+                                                <h4><?php 
+                                                echo $total_purchases;
+                                                ?>
+                                                </h4>
                                             </div>
                                         </div>
                                     </div>
@@ -349,8 +362,11 @@
                                                     class="img-fluid" alt="image">
                                             </div>
                                             <div>
-                                                <p class="mb-2">Delivered</p>
-                                                <h4>400</h4>
+                                                <p class="mb-2">Total Supplier</p>
+                                                <h4><?php 
+                                                echo $total_suppliers;
+                                                ?>
+                                                </h4>
                                             </div>
                                         </div>
                                     </div>
@@ -359,139 +375,141 @@
                         </div>
                     </div>
                 </div>
-                <div class="row ">
-                    <div class="col-lg-8 ">
-                        <div class="card card-block card-stretch card-height">
+                <div class="row  d-flex align-items-stretch">
+                    <div class="col-lg-8 d-flex flex-column">
+                        <div class="card card-block card-stretch card-height  flex-grow-1">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <div class="header-title">
-                                    <h4 class="card-title">Top Products</h4>
+                                    <h4 class="card-title">Top Products </h4>
                                 </div>
                                 <div class="card-header-toolbar d-flex align-items-center">
-                                    <div class="dropdown">
-                                        <span class="dropdown-toggle dropdown-bg btn" id="dropdownMenuButton006"
-                                            data-toggle="dropdown">
-                                            This Month<i class="ri-arrow-down-s-line ml-1"></i>
-                                        </span>
-                                        <div class="dropdown-menu dropdown-menu-right shadow-none"
-                                            aria-labelledby="dropdownMenuButton006">
-                                            <a class="dropdown-item" href="#">Year</a>
-                                            <a class="dropdown-item" href="#">Month</a>
-                                            <a class="dropdown-item" href="#">Week</a>
-                                        </div>
+                                        <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
+                                            This Month
+                                        </button>
+                                    </div>
+                                       
+                            </div>
+                            <?php
+// Ensure the database connection is open
+$conn = mysqli_connect("localhost", "root", "", "inventrix");
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// SQL Query to get top products
+$sql_top_products = "SELECT 
+    p.ProductName,
+    p.Quantity,
+    p.Url,
+    COUNT(s.ProductCode) as sales_count
+    FROM product p
+    LEFT JOIN sales s ON p.ProductCode = s.ProductCode
+    GROUP BY p.ProductCode
+    ORDER BY sales_count DESC
+    LIMIT 6";
+
+$result_top_products = mysqli_query($conn, $sql_top_products);
+
+// Check if the query was successful
+if (!$result_top_products) {
+    die("Query failed: " . mysqli_error($conn));
+}
+?>
+
+<div class="card-body">
+    <ul class="list-unstyled row top-product mb-0">
+        <?php while ($row = mysqli_fetch_assoc($result_top_products)) { ?>
+            <li class="col-lg-3">
+                <div class="card card-block card-stretch card-height mb-0">
+                    <div class="card-body">
+                        <div class="bg-light rounded">
+                            <img src="<?php echo !empty($row['Url']) ? $row['Url'] : './assets/images/default.png'; ?>" 
+                                 class="style-img img-fluid m-auto  object-cover h-100 w-100" alt="image" style="width: full !important; height: 200px !important; object-fit: cover; border-radius:8px;" >
+                                 
+                        </div>
+                        <div class="style-text text-left mt-3">
+                            <h5 class="mb-1"><?php echo htmlspecialchars($row['ProductName']); ?></h5>
+                            <p class="mb-0"><?php echo $row['sales_count']; ?> Items Sold</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <?php } ?>
+    </ul>
+</div>
+
+<?php
+// Close connection only after all queries are done
+mysqli_close($conn);
+?>
+
+
+<?php
+function formatNepaliCurrency($number) {
+    $exploded = explode('.', $number);
+    $intPart = $exploded[0];
+    $decimalPart = isset($exploded[1]) ? '.' . $exploded[1] : '';
+
+    // Apply Nepali currency formatting
+    $lastThree = substr($intPart, -3);
+    $remaining = substr($intPart, 0, -3);
+    
+    if ($remaining != '') {
+        $remaining = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $remaining);
+        $formattedNumber = $remaining . ',' . $lastThree;
+    } else {
+        $formattedNumber = $lastThree;
+    }
+
+    return $formattedNumber . $decimalPart;
+}
+
+$incomeFormatted = formatNepaliCurrency(number_format($income, 2, '.', ''));
+$expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
+?>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column">
+                        <div class="card card-block card-stretch card-height mb-2">
+                            <div class="card-body" style="background: url(./assets/income.svg); background-size: contain; background-position: right; background-repeat: no-repeat;">
+                                <div class="d-flex align-items-top justify-content-between">
+                                    <div>
+                                        <p class="mb-0">Income</p>
+                                        <h5>
+                                            <?php
+                                            echo "Rs. ". $incomeFormatted;
+                                            ?>
+                                        </h5>
+                                        
                                     </div>
                                 </div>
+                                <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
+                                    This Month
+                                </button>
                             </div>
-                            <div class="card-body">
-                                <ul class="list-unstyled row top-product mb-0">
-                                    <li class="col-lg-3 ">
-                                        <div class="card card-block card-stretch card-height mb-0">
-                                            <div class="card-body">
-                                                <div class="bg-warning-light rounded">
-                                                    <img src="./assets/images/product/01.png"
-                                                        class="style-img img-fluid m-auto p-3" alt="image">
-                                                </div>
-                                                <div class="style-text text-left mt-3">
-                                                    <h5 class="mb-1">Organic Cream</h5>
-                                                    <p class="mb-0">789 Item</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <div class="card card-block card-stretch card-height mb-0">
-                                            <div class="card-body">
-                                                <div class="bg-danger-light rounded">
-                                                    <img src="./assets/images/product/02.png"
-                                                        class="style-img img-fluid m-auto p-3" alt="image">
-                                                </div>
-                                                <div class="style-text text-left mt-3">
-                                                    <h5 class="mb-1">Rain Umbrella</h5>
-                                                    <p class="mb-0">657 Item</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <div class="card card-block card-stretch card-height mb-0">
-                                            <div class="card-body">
-                                                <div class="bg-info-light rounded">
-                                                    <img src="./assets/images/product/03.png"
-                                                        class="style-img img-fluid m-auto p-3" alt="image">
-                                                </div>
-                                                <div class="style-text text-left mt-3">
-                                                    <h5 class="mb-1">Serum Bottle</h5>
-                                                    <p class="mb-0">489 Item</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <div class="card card-block card-stretch card-height mb-0">
-                                            <div class="card-body">
-                                                <div class="bg-success-light rounded">
-                                                    <img src="./assets/images/product/02.png"
-                                                        class="style-img img-fluid m-auto p-3" alt="image">
-                                                </div>
-                                                <div class="style-text text-left mt-3">
-                                                    <h5 class="mb-1">Organic Cream</h5>
-                                                    <p class="mb-0">468 Item</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                        </div>
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body"style="background: url(./assets/expense.svg); background-size: contain; background-position: right; background-repeat: no-repeat; ">
+                                <div class="d-flex align-items-top justify-content-between">
+                                    <div>
+                                        <p class="mb-0">Expenses</p>
+                                        <h5><?php
+                                            echo "Rs. ". $expensesFormatted;
+                                            ?></h5>                                    </div>
+                                    
+                                </div>
+                                <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
+                                    This Month
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">  
-                        <div class="card card-block card-stretch card-height-helf">
-                            <div class="card-body">
-                                <div class="d-flex align-items-top justify-content-between">
-                                    <div class="">
-                                        <p class="mb-0">Income</p>
-                                        <h5>$ 98,7800 K</h5>
-                                    </div>
-                                    <div class="card-header-toolbar d-flex align-items-center">
-                                        <div class="dropdown">
-                                            <span class="dropdown-toggle dropdown-bg btn" id="dropdownMenuButton003"
-                                                data-toggle="dropdown">
-                                                This Month<i class="ri-arrow-down-s-line ml-1"></i>
-                                            </span>
-                                            <div class="dropdown-menu dropdown-menu-right shadow-none"
-                                                aria-labelledby="dropdownMenuButton003">
-                                                <a class="dropdown-item" href="#">Year</a>
-                                                <a class="dropdown-item" href="#">Month</a>
-                                                <a class="dropdown-item" href="#">Week</a>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                   
                                 </div>
-                                <div id="layout1-chart-3" class="layout-chart-1 mb-0"></div>
-                            </div>
-                        </div>
-                        <div class="card card-block card-stretch card-height-helf">
-                            <div class="card-body">
-                                <div class="d-flex align-items-top justify-content-between">
-                                    <div class="">
-                                        <p class="mb-0">Expenses</p>
-                                        <h5>$ 45,8956 K</h5>
-                                    </div>
-                                    <div class="card-header-toolbar d-flex align-items-center">
-                                        <div class="dropdown">
-                                            <span class="dropdown-toggle dropdown-bg btn" id="dropdownMenuButton004"
-                                                data-toggle="dropdown">
-                                                This Month<i class="ri-arrow-down-s-line ml-1"></i>
-                                            </span>
-                                            <div class="dropdown-menu dropdown-menu-right shadow-none"
-                                                aria-labelledby="dropdownMenuButton004">
-                                                <a class="dropdown-item" href="#">Year</a>
-                                                <a class="dropdown-item" href="#">Month</a>
-                                                <a class="dropdown-item" href="#">Week</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="layout1-chart-4" class="layout-chart-2 mb-0"></div>
+                              
                             </div>
                         </div>
                     </div>
@@ -514,7 +532,7 @@
     <script src="./js/table-treeview.js"></script>
 
     <!-- Chart Custom JavaScript -->
-    <script async src="./js/chart-custom.js"></script>
+
 
 
     <!-- app JavaScript -->

@@ -40,7 +40,7 @@
         $sale_amount = $row['SaleAmount'];
         $available_stock = $row['Quantity'];
 
-        if ($available_stock >= $quantity) {
+        if ($available_stock <= $quantity) {
 
         // Insert into the purchase table
         $sql = "INSERT INTO `sales` (`Date`, `ProductCode`, `Quantity`, `PaymentStatus`, `SalesAmount`, `Biller`, `Customer`, `ShippingAddress`) 

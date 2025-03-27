@@ -34,7 +34,7 @@
 
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                <a href="./dashboard.html" class="header-logo">
+                <a href="./dashboard_html.php" class="header-logo">
                     <img src="./assets/Logoup.svg" class="logo-title light-logo ml-3" alt="logo">
                     <!-- <h5 class="logo-title light-logo ml-3">POSDash</h5> -->
                 </a>
@@ -46,7 +46,7 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class=" ">
-                            <a href="./dashboard.html" class="svg-icon">
+                            <a href="./dashboard_html.php" class="svg-icon">
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -194,7 +194,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
-                        <a href="./dashboard.html" class="header-logo">
+                        <a href="./dashboard_html.php" class="header-logo">
                             <img src="./assets/Logoup.svg" class="logo-title ml-3" alt="logo">
 
                         </a>
@@ -328,16 +328,14 @@
                                         <td><?php echo $row['PhoneNo']; ?></td>
                                         <td><?php echo $row['Address']; ?></td>
                                         <td><?php echo $row['PANNo']; ?></td>
-                                        <td><a href="deletesupplier.php?pan=<?php echo $row['PANNo'] ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this supplier?');">Delete</a></td>
+
+                                        <td><a href="deletesupplier.php?pan=<?php echo $row['PANNo'] ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this supplier?');">Delete</a>
+                                        </td>
+
                                         </tr>
                                         <?php
                                         }
-
-                                        
                                         ?>
-                                        
-                                    
-                                    
                                 </tbody>
                             </table>
                         </div>
