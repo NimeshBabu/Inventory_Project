@@ -274,7 +274,7 @@
                                                     <h5 class="mb-1">user123@gmail.com</h5>
                                                     <p class="mb-0">Since 10 march, 2020</p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
-                                                        <a href="./login.html" class="btn border">Log Out</a>
+                                                        <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
                                                 </div>
                                             </div>

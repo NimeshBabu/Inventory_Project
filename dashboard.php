@@ -1,11 +1,11 @@
 <?php
 session_start();
+if (!isset($_SESSION["email"])) {
+    header("Location: login_html.php");
+    // exit();
+}
 
-// Check if user is logged in
-// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header("Location: login.php");
-//     exit();
-// }
+
 
 $servername = "localhost";
 $username = "root";

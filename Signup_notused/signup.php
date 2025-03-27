@@ -33,7 +33,7 @@
         $sql="INSERT INTO `user` (`email`, `password`) VALUES ('$email', '$hash')";
         if (mysqli_query($conn, $sql)) {
         $_SESSION['success'] = "Account created successfully! Please log in."; //Alert message is generated in login page
-        header("Location: login.html");
+        header("Location: login_html.php");
         exit();
         }
         

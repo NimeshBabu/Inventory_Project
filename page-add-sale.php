@@ -271,7 +271,7 @@
                                                     <h5 class="mb-1">user123@gmail.com</h5>
                                                     <p class="mb-0">Since 10 march, 2020</p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
-                                                        <a href="./login.html" class="btn border">Log Out</a>
+                                                        <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -312,8 +312,12 @@
                                                     <?php
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" . htmlspecialchars($row['ProductCode']) . "</option>";
+                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" 
+                                                                 . htmlspecialchars($row['ProductName']) . " - " 
+                                                                 . htmlspecialchars($row['ProductCode']) . 
+                                                                 "</option>";
                                                         }
+                                                        
                                                     } else {
                                                         echo "<option value=''>No Product Code available</option>";
                                                     }
