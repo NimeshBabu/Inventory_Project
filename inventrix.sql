@@ -1,30 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Mar 28, 2025 at 06:48 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+CREATE DATABASE inventrix;
+USE inventrix;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `inventrix`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -38,9 +19,6 @@ CREATE TABLE `product` (
   `Supplier-PAN` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product`
---
 
 INSERT INTO `product` (`ProductCode`, `ProductName`, `Cost`, `Price`, `Description`, `Url`, `Quantity`, `Supplier-PAN`) VALUES
 ('1221', 'Dining Table', 30000.00, 37000.00, '4 chair\r\n', 'https://i5.walmartimages.com/seo/SEGMART-Dining-Table-4-High-back-Upholstered-Chairs-Modern-Dinette-Set-Chairs-Set-Persons-Small-Home-Kitchen-Ideal-Apartment-Breakfast-Nook_bc8ea994-0caa-44fc-9fd9-c287225f7408.aa04dbb32beb866b7e87757d95a5c299.jpeg', 0, 'ABC Company-1111'),
@@ -66,9 +44,6 @@ CREATE TABLE `purchase` (
   `Supplier-PAN` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `purchase`
---
 
 INSERT INTO `purchase` (`PurchaseID`, `Date`, `ProductCode`, `Quantity`, `PurchaseAmount`, `PaymentStatus`, `Supplier-PAN`) VALUES
 (1229, '2025-03-05', '1221', 25, 750000.00, 'Paid', 'ABC Company-1111'),
@@ -99,7 +74,6 @@ CREATE TABLE `sales` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `sales`
 --
 
 INSERT INTO `sales` (`SaleID`, `Date`, `ProductCode`, `Customer`, `ShippingAddress`, `Biller`, `Quantity`, `SalesAmount`, `PaymentStatus`) VALUES
@@ -130,7 +104,6 @@ CREATE TABLE `supplier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `supplier`
 --
 
 INSERT INTO `supplier` (`Supplier-PAN`, `Supplier`, `Email`, `PhoneNo`, `Address`, `PANNo`) VALUES
@@ -152,7 +125,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`s_no`, `email`, `password`, `date`) VALUES
@@ -244,7 +216,3 @@ ALTER TABLE `purchase`
 ALTER TABLE `sales`
   ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`ProductCode`) REFERENCES `product` (`ProductCode`) ON UPDATE CASCADE;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
