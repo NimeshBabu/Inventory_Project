@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["email"])) {
-    header("Location: login_html.php");
-    exit();
-}
 include "dashboard.php";
 $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
 
