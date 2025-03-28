@@ -27,7 +27,6 @@ include "dashboard.php";
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
                 <a href="./dashboard_html.php" class="header-logo">
                     <img src="./assets/Logoup.svg" class="logo-title light-logo ml-3" alt="logo">
-                    <!-- <h5 class="logo-title light-logo ml-3">POSDash</h5> -->
                 </a>
                 <div class="iq-menu-bt-sidebar ml-0">
                     <i class="las la-bars wrapper-menu"></i>

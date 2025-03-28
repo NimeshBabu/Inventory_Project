@@ -49,20 +49,3 @@
 
 
 
-
-        // $row=mysqli_fetch_assoc($result);
-        // $hash=password_verify($pass, $row['password']);
-        // echo "<br>";
-        // echo $pass;
-        // echo "<br>";
-        // echo $row['password'];
-        // echo "<br>";
-        // if ($hash){
-        //     echo "Password is correct";
-        // }
-        // else{
-        //     echo "Password is incorrect";
-        // }
-        // echo "<br>";
-        // $hash1=password_hash($pass, PASSWORD_DEFAULT);
-        // echo $hash1;
