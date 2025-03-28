@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     mysqli_stmt_bind_param($stmt, "si", $payment_status, $sale_id);
 
     if (mysqli_stmt_execute($stmt)) {
-        $_SESSION['success'] = "Payment status updated.";
+        $_SESSION['success'] = "Payment status updated sucessfully!";
     } else {
         $_SESSION['error'] = "Failed to update payment status: " . mysqli_error($conn);
     }

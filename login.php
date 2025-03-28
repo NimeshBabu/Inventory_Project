@@ -1,5 +1,10 @@
 <?php  
         session_start();
+        if (isset($_SESSION["email"])) {
+            header("Location: dashboard_html.php");
+            exit();
+        }
+
         $servername="localhost";
         $username="root";
         $password="";
@@ -13,8 +18,8 @@
 
 
         if ($_SERVER['REQUEST_METHOD']=='POST'){           
-        $email=$_POST['email'];
-        $pass=$_POST['password'];
+        $email=trim($_POST['email']);
+        $pass=trim($_POST['password']);
        
         
         // To check if the user already exists and if the password is correct
@@ -25,6 +30,8 @@
         if($num>0) {
             $row=mysqli_fetch_assoc($result);
                 if(password_verify($pass, $row['password'])){    //extracts salt form stored hash and uses it to hash the entered password and then compares it with the stored hash
+                    $_SESSION['email'] = $email; 
+                    $_SESSION['date'] = $row['date'];
                     $_SESSION['success'] = "Logged in successfully!";
                     header("Location: dashboard_html.php");
                     exit();
@@ -32,7 +39,7 @@
         
                 else{                    
                     $_SESSION['error'] = "Invalid password! Please try again.";
-                    header("Location: login.html");
+                    header("Location: login_html.php");
                     exit();
                 }
                
@@ -41,11 +48,14 @@
 
         else {
             $_SESSION['error'] = "User does not exist! Please check your email.";
-            header("Location: login.html");
+            header("Location: login_html.php");
             exit();
         }
     }
 ?>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 39ff09f1c21fac17a9fb9a50607310b0d8424e7b

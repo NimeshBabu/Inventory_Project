@@ -1,7 +1,15 @@
 <?php
+ session_start();
+ if (!isset($_SESSION["email"])) {
+     header("Location: login_html.php");
+     exit();
+ }
+ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
+
  require_once('config/db.php');
  $query= "select * from product";
  $result= mysqli_query($con,$query);
+ 
 
 ?>
 
@@ -172,7 +180,7 @@
                                     </a>
                                 </li>
                                 <li class=" ">
-                                    <a href="./page-add-supplier.html">
+                                    <a href="./page-add-supplier.php">
                                         <i class="las la-minus"></i><span>Add Suppliers</span>
                                     </a>
                                 </li>
@@ -268,10 +276,10 @@
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                    <h5 class="mb-1">user123@gmail.com</h5>
-                                                    <p class="mb-0">Since 10 march, 2020</p>
+                                                <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
+                                                <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
-                                                        <a href="./login.html" class="btn border">Log Out</a>
+                                                        <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -317,8 +325,12 @@
                                                     <?php
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" . htmlspecialchars($row['ProductCode']) . "</option>";
+                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" 
+                                                                 . htmlspecialchars($row['ProductName']) . " - " 
+                                                                 . htmlspecialchars($row['ProductCode']) . 
+                                                                 "</option>";
                                                         }
+                                                        
                                                     } else {
                                                         echo "<option value=''>No Product Code available</option>";
                                                     }

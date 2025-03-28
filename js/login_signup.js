@@ -71,10 +71,3 @@ function showAlert(message, type) {
 }
 
 
-
-
-
-//Function for the arrow in login page to go back in landing page
-function goToLandingPage() {
-  window.location.href = "./index.html";
-}

@@ -1,11 +1,11 @@
 <?php
 session_start();
+if (!isset($_SESSION["email"])) {
+    header("Location: login_html.php");
+    exit();
+}
 
-// Check if user is logged in
-// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header("Location: login.php");
-//     exit();
-// }
+
 
 $servername = "localhost";
 $username = "root";
@@ -59,6 +59,8 @@ $expenses = mysqli_fetch_assoc($result_expenses)['total_expenses'] ?? 0;
 
 // Get user email from session
 $user_email = $_SESSION['email'] ?? 'user@example.com';
+
+
 
 // Close connection
 mysqli_close($conn);
