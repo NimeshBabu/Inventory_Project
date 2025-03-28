@@ -3,7 +3,7 @@ session_start();
 session_unset();
 session_destroy();
 
-
-header("Location: login_html.php");
+$_SESSION['success'] = "Logged out successfully.";
+header("Location: index.php");
 exit();
 ?>

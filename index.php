@@ -1,3 +1,13 @@
+<?php  
+        session_start();
+        if (isset($_SESSION["email"])) {
+            header("Location: dashboard_html.php");
+            exit();
+        }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,8 +31,8 @@
         <link href="css/styles.css" rel="stylesheet" />
     
     </head>
-    <body id="page-top">
 
+    <body id="page-top">
 
         <!-- NAVIGATION-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -44,7 +54,7 @@
                 </div>
         
                 <div class="d-flex ">
-                    <a href="./login_html.php" class="btn btn-primary" id="loginBtn">Get-Started</a>
+                    <a href="login_html.php" class="btn btn-primary" id="loginBtn">Get-Started</a>
 
                 </div>
             </div>
@@ -410,8 +420,6 @@
         <footer class="bg-light py-5">
             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2023 INVENTRIX | All Rights Reserved</div></div>
         </footer>
-
-
 
 
         <!-- Bootstrap core JS-->

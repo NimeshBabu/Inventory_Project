@@ -26,7 +26,7 @@
 
     if($num>0) {
         $_SESSION['error'] = "'" .$supplier. "' already exists! ";
-        header("Location: page-add-supplier.html");
+        header("Location: page-add-supplier.php");
         exit();    
     }
 
@@ -39,7 +39,7 @@
         
         else {
         $_SESSION['error'] = "Something went wrong! Please try again.";
-        header("Location: page-add-supplier.html");
+        header("Location: page-add-supplier.php");
         exit();
         }   
 

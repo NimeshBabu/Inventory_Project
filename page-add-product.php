@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION["email"])) {
+    header("Location: login_html.php");
+    exit();
+}
+
+$date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
+
 // Database connection
 $con=mysqli_connect(hostname: "localhost",username: "root",password: "", database: "inventrix");
 
@@ -174,7 +182,7 @@ $result = $con->query(query: $sql);
                                     </a>
                                 </li>
                                 <li class=" ">
-                                    <a href="./page-add-supplier.html">
+                                    <a href="./page-add-supplier.php">
                                         <i class="las la-minus"></i><span>Add Suppliers</span>
                                     </a>
                                 </li>
@@ -270,8 +278,8 @@ $result = $con->query(query: $sql);
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                    <h5 class="mb-1">user123@gmail.com</h5>
-                                                    <p class="mb-0">Since 10 march, 2020</p>
+                                                <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
+                                                <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>

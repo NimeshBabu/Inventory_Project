@@ -5,6 +5,8 @@ if (!isset($_SESSION["email"])) {
     exit();
 }
 include "dashboard.php";
+$date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
+
 ?>
 
 <!doctype html>
@@ -171,7 +173,7 @@ include "dashboard.php";
                                     </a>
                                 </li>
                                 <li class=" ">
-                                    <a href="./page-add-supplier.html">
+                                    <a href="./page-add-supplier.php">
                                         <i class="las la-minus"></i><span>Add Suppliers</span>
                                     </a>
                                 </li>
@@ -267,8 +269,13 @@ include "dashboard.php";
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
+<<<<<<< HEAD
                                                     <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION['email']); ?></h5>
                                                     <p class="mb-0">Since <?php echo date('d M, Y'); ?></p>
+=======
+                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
+                                                    <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
+>>>>>>> 39ff09f1c21fac17a9fb9a50607310b0d8424e7b
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
@@ -288,11 +295,21 @@ include "dashboard.php";
                 <div class="row">
                     <div class="col-lg-6 mb-4 back">
                         <div class="mb-3 p-3 rounded">
+<<<<<<< HEAD
                             <h2 class="text-dark ">Hi <?php 
                                 $email = $_SESSION['email'];
                                 $username = strtok($email, '@');
                                 echo htmlspecialchars(ucfirst($username)); 
                             ?>,<br>Welcome Back!</h2>
+=======
+                        <?php
+                            $email = $_SESSION["email"];
+                            $username = explode("@", $email)[0]; // Get the part before "@"
+                            $username = preg_replace("/[0-9]/", "", $username); // Remove numbers
+
+                        ?>
+                            <h2 class="text-dark">Hi <?php echo htmlspecialchars($username); ?>,<br>Welcome Back!</h2>                        
+>>>>>>> 39ff09f1c21fac17a9fb9a50607310b0d8424e7b
                         </div>
                     </div>
 
@@ -502,10 +519,10 @@ $expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
                             </div>
                         </div>
                         <div class="card card-block card-stretch card-height">
-                            <div class="card-body"style="background: url(./assets/expense.svg); background-size: contain; background-position: right; background-repeat: no-repeat; ">
+                            <div class="card-body"style="background: url(./assets/expenses.svg); background-size: contain; background-position: right; background-repeat: no-repeat; ">
                                 <div class="d-flex align-items-top justify-content-between">
                                     <div>
-                                        <p class="mb-0">Expenses</p>
+                                        <p class="mb-0">Expense</p>
                                         <h5><?php
                                             echo "Rs. ". $expensesFormatted;
                                             ?></h5>                                    </div>
