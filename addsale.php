@@ -30,33 +30,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Get product details
-    $select_sql = "SELECT ProductCode, ProductName, Quantity, Price * $quantity AS SaleAmount FROM product WHERE ProductCode = '$product_code'";
-    $result = mysqli_query($conn, $select_sql);
+    $select_sql = "SELECT ProductCode, ProductName, Quantity, Price FROM product WHERE ProductCode = ?";
+    $stmt = mysqli_prepare($conn, $select_sql);
+    mysqli_stmt_bind_param($stmt, "s", $product_code);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $sale_amount = $row['SaleAmount'];
+        $sale_amount = $row['Price'] * $quantity;
         $available_stock = $row['Quantity'];
 
-        if ($available_stock >= $quantity) {  // Ensure enough stock is available
-            // Insert into sales table
-            $sql = "INSERT INTO `sales` (`Date`, `ProductCode`, `Quantity`, `PaymentStatus`, `SalesAmount`, `Biller`, `Customer`, `ShippingAddress`) 
-                    VALUES ('$date', '$product_code', '$quantity', '$pay_status', '$sale_amount', '$biller', '$customer', '$ship_add')";
+        if ($available_stock >= $quantity) {
+            // Start transaction
+            mysqli_begin_transaction($conn);
+            
+            try {
+                // Insert into sales table
+                $insert_sql = "INSERT INTO `sales` (`Date`, `ProductCode`, `Quantity`, `PaymentStatus`, `SalesAmount`, `Biller`, `Customer`, `ShippingAddress`) 
+                              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $insert_sql);
+                mysqli_stmt_bind_param($stmt, "ssisssss", $date, $product_code, $quantity, $pay_status, $sale_amount, $biller, $customer, $ship_add);
+                mysqli_stmt_execute($stmt);
 
-            if (mysqli_query($conn, $sql)) {
                 // Update Product Quantity
-                $update_sql = "UPDATE `product` SET Quantity = Quantity - $quantity WHERE ProductCode = '$product_code'";
-                mysqli_query($conn, $update_sql);
+                $update_sql = "UPDATE `product` SET Quantity = Quantity - ? WHERE ProductCode = ?";
+                $stmt = mysqli_prepare($conn, $update_sql);
+                mysqli_stmt_bind_param($stmt, "is", $quantity, $product_code);
+                mysqli_stmt_execute($stmt);
 
+                mysqli_commit($conn);
                 $_SESSION['success'] = "Sales record added & stock updated successfully!";
                 header("Location: page-list-sale.php");
                 exit();
-            } else {
+            } catch (Exception $e) {
+                mysqli_rollback($conn);
                 $_SESSION['error'] = "Something went wrong! Please try again.";
                 header("Location: page-add-sale.php");
                 exit();
             }
         } else {
-            $_SESSION['error'] = "Not enough stock available!";
+            $_SESSION['error'] = "Not enough stock available! Available stock: " . $available_stock;
             header("Location: page-add-sale.php");
             exit();
         }

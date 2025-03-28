@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION["email"])) {
+    header("Location: login.php");
+    exit();
+}
 include "dashboard.php";
 ?>
 
@@ -262,8 +267,8 @@ include "dashboard.php";
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                    <h5 class="mb-1">user123@gmail.com</h5>
-                                                    <p class="mb-0">Since 10 march, 2020</p>
+                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION['email']); ?></h5>
+                                                    <p class="mb-0">Since <?php echo date('d M, Y'); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
@@ -283,7 +288,11 @@ include "dashboard.php";
                 <div class="row">
                     <div class="col-lg-6 mb-4 back">
                         <div class="mb-3 p-3 rounded">
-                            <h2 class="text-dark ">Hi User,<br>Welcome Back!</h2>
+                            <h2 class="text-dark ">Hi <?php 
+                                $email = $_SESSION['email'];
+                                $username = strtok($email, '@');
+                                echo htmlspecialchars(ucfirst($username)); 
+                            ?>,<br>Welcome Back!</h2>
                         </div>
                     </div>
 
