@@ -21,7 +21,9 @@ require "login.php";
 
     <section class="container">
         <div class="form-banner login-banner">
-            <i class="ri-arrow-left-line prev" onclick="goToLandingPage()"></i>
+        <a href="index.php">
+            <i class="ri-arrow-left-line prev"></i>
+        </a>
         </div>
         <div class="form-content">
             <div class="form login">

@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION["email"])) {
+    header("Location: login_html.php");
+    exit();
+}
+$date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
+
  require_once('config/db.php');
  $query= "select * from supplier";
  $result= mysqli_query($con,$query);
@@ -175,7 +182,7 @@
                                     </a>
                                 </li>
                                 <li class=" ">
-                                    <a href="./page-add-supplier.html">
+                                    <a href="./page-add-supplier.php">
                                         <i class="las la-minus"></i><span>Add Suppliers</span>
                                     </a>
                                 </li>
@@ -271,8 +278,8 @@
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                    <h5 class="mb-1">user123@gmail.com</h5>
-                                                    <p class="mb-0">Since 10 march, 2020</p>
+                                                <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
+                                                <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
@@ -299,7 +306,7 @@
                             <div>
                                 <h4 class="mb-3">Suppliers List</h4>
                             </div>
-                            <a href="page-add-supplier.html" class="btn btn-primary add-list"><i
+                            <a href="page-add-supplier.php" class="btn btn-primary add-list"><i
                                     class="las la-plus mr-3"></i>Add Supplier</a>
                         </div>
                     </div>

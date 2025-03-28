@@ -168,7 +168,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                     </a>
                                 </li>
                                 <li class=" ">
-                                    <a href="./page-add-supplier.html">
+                                    <a href="./page-add-supplier.php">
                                         <i class="las la-minus"></i><span>Add Suppliers</span>
                                     </a>
                                 </li>
@@ -285,7 +285,13 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                 <div class="row">
                     <div class="col-lg-6 mb-4 back">
                         <div class="mb-3 p-3 rounded">
-                            <h2 class="text-dark ">Hi User,<br>Welcome Back!</h2>
+                        <?php
+                            $email = $_SESSION["email"];
+                            $username = explode("@", $email)[0]; // Get the part before "@"
+                            $username = preg_replace("/[0-9]/", "", $username); // Remove numbers
+
+                        ?>
+                            <h2 class="text-dark">Hi <?php echo htmlspecialchars($username); ?>,<br>Welcome Back!</h2>                        
                         </div>
                     </div>
 
@@ -495,10 +501,10 @@ $expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
                             </div>
                         </div>
                         <div class="card card-block card-stretch card-height">
-                            <div class="card-body"style="background: url(./assets/expense.svg); background-size: contain; background-position: right; background-repeat: no-repeat; ">
+                            <div class="card-body"style="background: url(./assets/expenses.svg); background-size: contain; background-position: right; background-repeat: no-repeat; ">
                                 <div class="d-flex align-items-top justify-content-between">
                                     <div>
-                                        <p class="mb-0">Expenses</p>
+                                        <p class="mb-0">Expense</p>
                                         <h5><?php
                                             echo "Rs. ". $expensesFormatted;
                                             ?></h5>                                    </div>
