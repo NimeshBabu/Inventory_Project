@@ -369,7 +369,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/kushal.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/Kushal.jpg" alt="..." />
                             <h4>Kripesh Adhikari</h4>
                             <p class="text-muted">Stock Manager</p>
                             <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/kushal.adk.5/" target="_blank" aria-label="Kripesh Adhikari Instagram Profile"><i class="fab fa-instagram"></i></a>
@@ -378,7 +378,7 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/nimesh1.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/NimeshBabu.jpg" alt="..." />
                             <h4>Nimesh Babu Thapa</h4>
                             <p class="text-muted">Lead Designer</p>
                             <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/nimesh_thapa_21/" target="_blank" aria-label="Nimesh Babu Thapa Instagram Profile"><i class="fab fa-instagram"></i></a>
@@ -387,7 +387,7 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/kriti.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/Kritisha.jpg" alt="..." />
                             <h4>Kritisha Shrestha</h4>
                             <p class="text-muted">Inventory Head</p>
                             <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/kritisha_shrestha/" target="_blank" aria-label="Kritisha Shrestha Instagram Profile"><i class="fab fa-instagram"></i></a>
@@ -396,7 +396,7 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/panku.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src="assets/img/team/Panku.jpg" alt="..." />
                             <h4>Pratibha Sharma</h4>
                             <p class="text-muted">Purchase Lead</p>
                             <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/prativaa_s/" target="_blank" aria-label="Pratibha Sharma Instagram Profile"><i class="fab fa-instagram"></i></a>

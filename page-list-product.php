@@ -326,7 +326,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                         ?>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                            <img src="<?php echo $row['Url']; ?>" alt="Img" style="width:50px; height:50px; border-radius: 10px; object-fit: cover; margin-right: 10px;">
+                                            <img src="<?php echo $row['Url']; ?>" alt="Img" style="width:85px; height:77px; border-radius: 10px; object-fit: cover; margin-right: 10px;">
                                                 <div style="display: flex; flex-direction: column; justify-content: center;">
                                                 <strong><?php echo $row['ProductName']; ?></strong>
                                                 <p class="mb-0 text-muted"><small><?php echo $row['Description']; ?></small></p>
