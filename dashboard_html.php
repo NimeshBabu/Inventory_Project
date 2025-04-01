@@ -408,15 +408,15 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
 
                             // SQL Query to get top products
                             $sql_top_products = "SELECT 
-                            p.ProductName,
-                            p.Quantity,
-                            p.Url,
-                            COUNT(s.ProductCode) as sales_count
-                            FROM product p
-                            LEFT JOIN sales s ON p.ProductCode = s.ProductCode
-                            GROUP BY p.ProductCode
-                            ORDER BY sales_count DESC
-                            LIMIT 6";
+    p.ProductName,
+    p.Quantity AS stock_quantity,
+    p.Url,
+    COALESCE(SUM(s.Quantity), 0) AS sales_quantity
+FROM product p
+LEFT JOIN sales s ON p.ProductCode = s.ProductCode
+GROUP BY p.ProductCode
+ORDER BY sales_quantity DESC
+LIMIT 6";
 
                             $result_top_products = mysqli_query($conn, $sql_top_products);
 
@@ -439,7 +439,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                                     </div>
                                                     <div class="style-text text-left mt-3">
                                                         <h5 class="mb-1"><?php echo htmlspecialchars($row['ProductName']); ?></h5>
-                                                        <p class="mb-0"><?php echo $row['sales_count']; ?> Items Sold</p>
+                                                        <p class="mb-0"><?php echo $row['sales_quantity']; ?> Items Sold</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -510,6 +510,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                             echo "Rs. " . $expensesFormatted;
                                             ?></h5>
                                     </div>
+
                                 </div>
                                 <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
                                     This Month
