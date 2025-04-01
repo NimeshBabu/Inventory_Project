@@ -385,7 +385,7 @@ $result = mysqli_query($con, $query);
                                         <div class="col-md-6" id="due_amount_section" style="display: none;">
                                             <div class="form-group">
                                                 <label for="due_amount">Due Amount *</label>
-                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0">
+                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0" placeholder="Enter Due Amount" required>
                                                 <small id="due_warning" style="display: none; font-size: 15px; color: red; font-weight: bold;">Due Amount should be less than Sale Amount!</small>
                                             </div>
                                         </div>
@@ -486,6 +486,18 @@ $result = mysqli_query($con, $query);
             // Update sale amount when quantity or product changes
             quantityInput.addEventListener("input", updateSaleAmount);
             productSelect.addEventListener("change", updateSaleAmount);
+
+            // Reset functionality for the reset button
+            document.querySelector('button[type="reset"]').addEventListener('click', function() {
+                // Hide the small tags
+                totalSaleDisplay.style.display = "none";
+                dueWarning.style.display = "none";
+                stockInfo.style.display = "none";
+
+                // Reset the due amount section and hide it
+                dueAmountInput.value = "";
+                dueAmountSection.style.display = "none";
+            });
         });
     </script>
 </body>

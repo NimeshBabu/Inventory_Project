@@ -385,7 +385,7 @@ $result = mysqli_query($con, $query);
                                             // Format SalesAmount in Nepali currency
                                             $formattedSalesAmount = formatNepaliCurrency(number_format($row['SalesAmount'], 2, '.', ''));
                                         ?>
-                                            <td><?php echo $row['Date']; ?></td>
+                                            <td><?php echo date('d M, Y', strtotime($row['Date'])); ?></td>
                                             <td><?php echo $row['ProductCode']; ?></td>
                                             <td><?php echo $row['Customer']; ?></td>
                                             <td><?php echo $row['ShippingAddress']; ?></td>

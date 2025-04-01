@@ -21,8 +21,7 @@ $result = mysqli_query($con, $query);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>POS Dash | Responsive Bootstrap 4 Admin Dashboard Template</title>
-
+    <title>INVENTRIX </title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="./assets/Logo.svg" />
     <link rel="stylesheet" href="./css/backend-plugin.min.css">
@@ -348,7 +347,7 @@ $result = mysqli_query($con, $query);
                                             <div class="form-group">
                                                 <label>Quantity *</label>
                                                 <input type="number" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity" required min="1">
-                                                <small id="total_purchase_display"  style="display: none; font-size:15px; color: green; font-weight:bold;"></small>
+                                                <small id="total_purchase_display" style="display: none; font-size:15px; color: green; font-weight:bold;"></small>
                                             </div>
                                         </div>
 
@@ -368,7 +367,7 @@ $result = mysqli_query($con, $query);
                                         <div class="col-md-6" id="due_amount_section" style="display: none;">
                                             <div class="form-group">
                                                 <label for="due_amount">Due Amount *</label>
-                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0">
+                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0" placeholder="Enter Due Amount" required>
                                                 <small id="due_warning" style="display: none; font-size:15px; color: red; font-weight:bold;">Due Amount should be less than Purchase Amount!</small>
                                             </div>
                                         </div>
@@ -388,6 +387,84 @@ $result = mysqli_query($con, $query);
     <!-- Wrapper End-->
 
 
+
+    <!-- JavaScript to Handle Due Amount Calculation -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const payStatus = document.getElementById("pay_status");
+    const dueAmountSection = document.getElementById("due_amount_section");
+    const dueAmountInput = document.getElementById("due_amount");
+    const totalPurchaseDisplay = document.getElementById("total_purchase_display");
+    const dueWarning = document.getElementById("due_warning");
+    const quantityInput = document.getElementById("quantity");
+    const productSelect = document.getElementById("product_code");
+
+    let purchaseAmount = 0;
+
+    function fetchProductCost(productCode, callback) {
+        fetch(`get_product_cost.php?product_code=${productCode}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.cost) {
+                    callback(data.cost);
+                }
+            })
+            .catch(error => console.error("Error fetching product cost:", error));
+    }
+
+    function updatePurchaseAmount() {
+        const quantity = parseFloat(quantityInput.value) || 0;
+        const productCode = productSelect.value;
+
+        if (productCode && quantity > 0) {
+            fetchProductCost(productCode, function(cost) {
+                purchaseAmount = cost * quantity;
+                totalPurchaseDisplay.innerHTML = `Total Purchase Amount: Rs. ${purchaseAmount.toFixed(2)}`;
+                totalPurchaseDisplay.style.display = "block";
+            });
+        } else {
+            totalPurchaseDisplay.style.display = "none";
+        }
+    }
+
+    // Show or Hide Due Amount Field
+    payStatus.addEventListener("change", function() {
+        if (payStatus.value === "due") {
+            dueAmountSection.style.display = "block";
+        } else {
+            dueAmountSection.style.display = "none";
+            dueAmountInput.value = "";
+            dueWarning.style.display = "none";
+        }
+    });
+
+    // Validate Due Amount
+    dueAmountInput.addEventListener("input", function() {
+        const dueAmount = parseFloat(dueAmountInput.value) || 0;
+        if (dueAmount >= purchaseAmount) {
+            dueWarning.style.display = "block";
+        } else {
+            dueWarning.style.display = "none";
+        }
+    });
+
+    // Update purchase amount when quantity or product changes
+    quantityInput.addEventListener("input", updatePurchaseAmount);
+    productSelect.addEventListener("change", updatePurchaseAmount);
+
+    // Reset functionality for the reset button
+    document.querySelector('button[type="reset"]').addEventListener('click', function() {
+        // Hide the small tags
+        totalPurchaseDisplay.style.display = "none";
+        dueWarning.style.display = "none";
+        
+        // Reset due amount and hide the section if payment status is not "due"
+        dueAmountInput.value = "";
+        dueAmountSection.style.display = "none";
+    });
+});
+
+    </script>
     <!-- Backend Bundle JavaScript -->
     <script src="./js/backend-bundle.min.js"></script>
     <!-- Table Treeview JavaScript -->
@@ -395,71 +472,6 @@ $result = mysqli_query($con, $query);
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
     <script src="./js/login_signup.js"></script>
-    <!-- JavaScript to Handle Due Amount Calculation -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const payStatus = document.getElementById("pay_status");
-            const dueAmountSection = document.getElementById("due_amount_section");
-            const dueAmountInput = document.getElementById("due_amount");
-            const totalPurchaseDisplay = document.getElementById("total_purchase_display");
-            const dueWarning = document.getElementById("due_warning");
-            const quantityInput = document.getElementById("quantity");
-            const productSelect = document.getElementById("product_code");
-
-            let purchaseAmount = 0;
-
-            function fetchProductCost(productCode, callback) {
-                fetch(`get_product_cost.php?product_code=${productCode}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.cost) {
-                            callback(data.cost);
-                        }
-                    })
-                    .catch(error => console.error("Error fetching product cost:", error));
-            }
-
-            function updatePurchaseAmount() {
-                const quantity = parseFloat(quantityInput.value) || 0;
-                const productCode = productSelect.value;
-
-                if (productCode && quantity > 0) {
-                    fetchProductCost(productCode, function(cost) {
-                        purchaseAmount = cost * quantity;
-                        totalPurchaseDisplay.innerHTML = `Total Purchase Amount: Rs. ${purchaseAmount.toFixed(2)}`;
-                        totalPurchaseDisplay.style.display = "block";
-                    });
-                } else {
-                    totalPurchaseDisplay.style.display = "none";
-                }
-            }
-
-            // Show or Hide Due Amount Field
-            payStatus.addEventListener("change", function() {
-                if (payStatus.value === "due") {
-                    dueAmountSection.style.display = "block";
-                } else {
-                    dueAmountSection.style.display = "none";
-                    dueAmountInput.value = "";
-                    dueWarning.style.display = "none";
-                }
-            });
-
-            // Validate Due Amount
-            dueAmountInput.addEventListener("input", function() {
-                const dueAmount = parseFloat(dueAmountInput.value) || 0;
-                if (dueAmount >= purchaseAmount) {
-                    dueWarning.style.display = "block";
-                } else {
-                    dueWarning.style.display = "none";
-                }
-            });
-
-            // Update purchase amount when quantity or product changes
-            quantityInput.addEventListener("input", updatePurchaseAmount);
-            productSelect.addEventListener("change", updatePurchaseAmount);
-        });
-    </script>
 
 </body>
 
