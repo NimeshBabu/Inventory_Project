@@ -21,7 +21,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
 </head>
 
 <body class="  ">
-<div id="alert-container"></div>
+    <div id="alert-container"></div>
 
     <!-- Wrapper Start -->
     <div class="wrapper">
@@ -118,25 +118,27 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                         </li>
                         <li class=" ">
                             <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                     <line x1="1" y1="10" x2="23" y2="10"></line>
                                 </svg>
                                 <span class="ml-4">Purchases</span>
                                 <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                            <a href="./page-list-purchase.php">
-                                                <i class="las la-minus"></i><span>List Purchases</span>
-                                            </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="./page-add-purchase.php">
-                                            <i class="las la-minus"></i><span>Add purchase</span>
-                                        </a>
-                                    </li>
+                                <li class="">
+                                    <a href="./page-list-purchase.php">
+                                        <i class="las la-minus"></i><span>List Purchases</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="./page-add-purchase.php">
+                                        <i class="las la-minus"></i><span>Add purchase</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class=" ">
@@ -172,7 +174,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                 </li>
                             </ul>
                         </li>
-                        
+
 
 
                     </ul>
@@ -233,7 +235,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                         </svg>
                                         <span class="bg-primary"></span>
                                     </a>
-                                    
+
                                 </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
@@ -262,7 +264,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
+                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>
                                                     <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
@@ -283,13 +285,13 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                 <div class="row">
                     <div class="col-lg-6 mb-4 back">
                         <div class="mb-3 p-3 rounded">
-                        <?php
+                            <?php
                             $email = $_SESSION["email"];
                             $username = explode("@", $email)[0]; // Get the part before "@"
                             $username = preg_replace("/[0-9]/", "", $username); // Remove numbers
 
-                        ?>
-                            <h2 class="text-dark">Hi <?php echo htmlspecialchars($username); ?>,<br>Welcome Back!</h2>                        
+                            ?>
+                            <h2 class="text-dark">Hi <?php echo htmlspecialchars($username); ?>,<br>Welcome Back!</h2>
                         </div>
                     </div>
 
@@ -308,9 +310,9 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                             </div>
                                             <div>
                                                 <p class="mb-2">Total Product</p>
-                                                <h4><?php 
-                                                echo $total_products;
-                                                ?>
+                                                <h4><?php
+                                                    echo $total_products;
+                                                    ?>
                                                 </h4>
                                             </div>
                                         </div>
@@ -329,9 +331,9 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                             </div>
                                             <div>
                                                 <p class="mb-2">Total Sale</p>
-                                                <h4><?php 
-                                                echo $total_sales;
-                                                ?>
+                                                <h4><?php
+                                                    echo $total_sales;
+                                                    ?>
                                                 </h4>
                                             </div>
                                         </div>
@@ -350,10 +352,10 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                                     class="img-fluid" alt="image">
                                             </div>
                                             <div>
-                                            <p class="mb-2">Total Purchase</p>
-                                                <h4><?php 
-                                                echo $total_purchases;
-                                                ?>
+                                                <p class="mb-2">Total Purchase</p>
+                                                <h4><?php
+                                                    echo $total_purchases;
+                                                    ?>
                                                 </h4>
                                             </div>
                                         </div>
@@ -371,9 +373,9 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                             </div>
                                             <div>
                                                 <p class="mb-2">Total Supplier</p>
-                                                <h4><?php 
-                                                echo $total_suppliers;
-                                                ?>
+                                                <h4><?php
+                                                    echo $total_suppliers;
+                                                    ?>
                                                 </h4>
                                             </div>
                                         </div>
@@ -391,90 +393,91 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                     <h4 class="card-title">Top Products </h4>
                                 </div>
                                 <div class="card-header-toolbar d-flex align-items-center">
-                                        <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
-                                            This Month
-                                        </button>
-                                    </div>
-                                       
+                                    <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
+                                        This Month
+                                    </button>
+                                </div>
+
                             </div>
                             <?php
-// Ensure the database connection is open
-$conn = mysqli_connect("localhost", "root", "", "inventrix");
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+                            // Ensure the database connection is open
+                            $conn = mysqli_connect("localhost", "root", "", "inventrix");
+                            if (!$conn) {
+                                die("Connection failed: " . mysqli_connect_error());
+                            }
 
-// SQL Query to get top products
-$sql_top_products = "SELECT 
-    p.ProductName,
-    p.Quantity,
-    p.Url,
-    COUNT(s.ProductCode) as sales_count
-    FROM product p
-    LEFT JOIN sales s ON p.ProductCode = s.ProductCode
-    GROUP BY p.ProductCode
-    ORDER BY sales_count DESC
-    LIMIT 6";
+                            // SQL Query to get top products
+                            $sql_top_products = "SELECT 
+                            p.ProductName,
+                            p.Quantity,
+                            p.Url,
+                            COUNT(s.ProductCode) as sales_count
+                            FROM product p
+                            LEFT JOIN sales s ON p.ProductCode = s.ProductCode
+                            GROUP BY p.ProductCode
+                            ORDER BY sales_count DESC
+                            LIMIT 6";
 
-$result_top_products = mysqli_query($conn, $sql_top_products);
+                            $result_top_products = mysqli_query($conn, $sql_top_products);
 
-// Check if the query was successful
-if (!$result_top_products) {
-    die("Query failed: " . mysqli_error($conn));
-}
-?>
+                            // Check if the query was successful
+                            if (!$result_top_products) {
+                                die("Query failed: " . mysqli_error($conn));
+                            }
+                            ?>
 
-<div class="card-body">
-    <ul class="list-unstyled row top-product mb-0">
-        <?php while ($row = mysqli_fetch_assoc($result_top_products)) { ?>
-            <li class="col-lg-3">
-                <div class="card card-block card-stretch card-height mb-0">
-                    <div class="card-body">
-                        <div class="bg-light rounded">
-                            <img src="<?php echo !empty($row['Url']) ? $row['Url'] : './assets/images/default.png'; ?>" 
-                                 class="style-img img-fluid m-auto  object-cover h-100 w-100" alt="image" style="width: full !important; height: 200px !important; object-fit: cover; border-radius:8px;" >
-                                 
-                        </div>
-                        <div class="style-text text-left mt-3">
-                            <h5 class="mb-1"><?php echo htmlspecialchars($row['ProductName']); ?></h5>
-                            <p class="mb-0"><?php echo $row['sales_count']; ?> Items Sold</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        <?php } ?>
-    </ul>
-</div>
+                            <div class="card-body">
+                                <ul class="list-unstyled row top-product mb-0">
+                                    <?php while ($row = mysqli_fetch_assoc($result_top_products)) { ?>
+                                        <li class="col-lg-3">
+                                            <div class="card card-block card-stretch card-height mb-0">
+                                                <div class="card-body">
+                                                    <div class="bg-light rounded">
+                                                        <img src="<?php echo !empty($row['Url']) ? $row['Url'] : './assets/images/default.png'; ?>"
+                                                            class="style-img img-fluid m-auto  object-cover h-100 w-100" alt="image" style="width: full !important; height: 200px !important; object-fit: cover; border-radius:8px;">
 
-<?php
-// Close connection only after all queries are done
-mysqli_close($conn);
-?>
+                                                    </div>
+                                                    <div class="style-text text-left mt-3">
+                                                        <h5 class="mb-1"><?php echo htmlspecialchars($row['ProductName']); ?></h5>
+                                                        <p class="mb-0"><?php echo $row['sales_count']; ?> Items Sold</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+
+                            <?php
+                            // Close connection only after all queries are done
+                            mysqli_close($conn);
+                            ?>
 
 
-<?php
-function formatNepaliCurrency($number) {
-    $exploded = explode('.', $number);
-    $intPart = $exploded[0];
-    $decimalPart = isset($exploded[1]) ? '.' . $exploded[1] : '';
+                            <?php
+                            function formatNepaliCurrency($number)
+                            {
+                                $exploded = explode('.', $number);
+                                $intPart = $exploded[0];
+                                $decimalPart = isset($exploded[1]) ? '.' . $exploded[1] : '';
 
-    // Apply Nepali currency formatting
-    $lastThree = substr($intPart, -3);
-    $remaining = substr($intPart, 0, -3);
-    
-    if ($remaining != '') {
-        $remaining = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $remaining);
-        $formattedNumber = $remaining . ',' . $lastThree;
-    } else {
-        $formattedNumber = $lastThree;
-    }
+                                // Apply Nepali currency formatting
+                                $lastThree = substr($intPart, -3);
+                                $remaining = substr($intPart, 0, -3);
 
-    return $formattedNumber . $decimalPart;
-}
+                                if ($remaining != '') {
+                                    $remaining = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $remaining);
+                                    $formattedNumber = $remaining . ',' . $lastThree;
+                                } else {
+                                    $formattedNumber = $lastThree;
+                                }
 
-$incomeFormatted = formatNepaliCurrency(number_format($income, 2, '.', ''));
-$expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
-?>
+                                return $formattedNumber . $decimalPart;
+                            }
+
+                            $incomeFormatted = formatNepaliCurrency(number_format($income, 2, '.', ''));
+                            $expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
+                            ?>
 
 
                         </div>
@@ -487,10 +490,10 @@ $expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
                                         <p class="mb-0">Income</p>
                                         <h5>
                                             <?php
-                                            echo "Rs. ". $incomeFormatted;
+                                            echo "Rs. " . $incomeFormatted;
                                             ?>
                                         </h5>
-                                        
+
                                     </div>
                                 </div>
                                 <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
@@ -499,14 +502,14 @@ $expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
                             </div>
                         </div>
                         <div class="card card-block card-stretch card-height">
-                            <div class="card-body"style="background: url(./assets/expenses.svg); background-size: contain; background-position: right; background-repeat: no-repeat; ">
+                            <div class="card-body" style="background: url(./assets/expenses.svg); background-size: contain; background-position: right; background-repeat: no-repeat; ">
                                 <div class="d-flex align-items-top justify-content-between">
                                     <div>
                                         <p class="mb-0">Expense</p>
                                         <h5><?php
-                                            echo "Rs. ". $expensesFormatted;
-                                            ?></h5>                                    </div>
-                                    
+                                            echo "Rs. " . $expensesFormatted;
+                                            ?></h5>
+                                    </div>
                                 </div>
                                 <button class="btn" style="background-color: #f0f0f0; color: #656464; font-weight: 500; font-size: 12px; border-radius: 6px; padding: 6px 12px; cursor: default;">
                                     This Month
@@ -515,16 +518,16 @@ $expensesFormatted = formatNepaliCurrency(number_format($expenses, 2, '.', ''));
                         </div>
                     </div>
 
-                                   
-                                </div>
-                              
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
+
             </div>
-            <!-- Page end  -->
         </div>
+    </div>
+    </div>
+    </div>
+    <!-- Page end  -->
+    </div>
     </div>
     </div>
     <!-- Wrapper End-->

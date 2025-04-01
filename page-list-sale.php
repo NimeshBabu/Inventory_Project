@@ -37,7 +37,7 @@ $result = mysqli_query($con, $query);
             padding: 6px;
             border-radius: 10px;
             font-weight: bold;
-            font-size:0.75rem;
+            font-size: 0.75rem;
             transition: background-color 0.3s, color 0.3s;
             cursor: pointer;
         }
@@ -66,7 +66,7 @@ $result = mysqli_query($con, $query);
 </head>
 
 <body class="  ">
-<div id="alert-container"></div>
+    <div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -163,25 +163,27 @@ $result = mysqli_query($con, $query);
                         </li>
                         <li class=" ">
                             <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                     <line x1="1" y1="10" x2="23" y2="10"></line>
                                 </svg>
                                 <span class="ml-4">Purchases</span>
                                 <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                            <a href="./page-list-purchase.php">
-                                                <i class="las la-minus"></i><span>List Purchases</span>
-                                            </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="./page-add-purchase.php">
-                                            <i class="las la-minus"></i><span>Add purchase</span>
-                                        </a>
-                                    </li>
+                                <li class="">
+                                    <a href="./page-list-purchase.php">
+                                        <i class="las la-minus"></i><span>List Purchases</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="./page-add-purchase.php">
+                                        <i class="las la-minus"></i><span>Add purchase</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
@@ -218,7 +220,7 @@ $result = mysqli_query($con, $query);
                                 </li>
                             </ul>
                         </li>
-                        
+
 
 
                     </ul>
@@ -279,7 +281,7 @@ $result = mysqli_query($con, $query);
                                         </svg>
                                         <span class="bg-primary"></span>
                                     </a>
-                                    
+
                                 </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
@@ -308,8 +310,8 @@ $result = mysqli_query($con, $query);
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
-                                                <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
+                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>
+                                                    <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
@@ -324,6 +326,28 @@ $result = mysqli_query($con, $query);
                 </nav>
             </div>
         </div>
+
+
+        <?php
+        function formatNepaliCurrency($number)
+        {
+            $exploded = explode('.', $number);
+            $intPart = $exploded[0];
+            $decimalPart = isset($exploded[1]) ? '.' . $exploded[1] : '';
+
+            $lastThree = substr($intPart, -3);
+            $remaining = substr($intPart, 0, -3);
+
+            if ($remaining != '') {
+                $remaining = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $remaining);
+                $formattedNumber = $remaining . ',' . $lastThree;
+            } else {
+                $formattedNumber = $lastThree;
+            }
+
+            return $formattedNumber . $decimalPart;
+        }
+        ?>
         
         <div class="content-page">
             <div class="container-fluid">
@@ -332,7 +356,7 @@ $result = mysqli_query($con, $query);
                         <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                             <div>
                                 <h4 class="mb-3">Sale List</h4>
-                                
+
                             </div>
                             <a href="./page-add-sale.php" class="btn btn-primary add-list"><i
                                     class="las la-plus mr-3"></i>Add Sale</a>
@@ -349,7 +373,7 @@ $result = mysqli_query($con, $query);
                                         <th>Shipping Address</th>
                                         <th>Biller</th>
                                         <th>Quantity</th>
-                                        <th>Sold Amount</th>
+                                        <th>Sale Amount</th>
                                         <th>Payment Status</th>
                                         <th>Delete</th>
                                     </tr>
@@ -358,6 +382,8 @@ $result = mysqli_query($con, $query);
                                     <tr>
                                         <?php
                                         while ($row = mysqli_fetch_assoc($result)) {
+                                            // Format SalesAmount in Nepali currency
+                                            $formattedSalesAmount = formatNepaliCurrency(number_format($row['SalesAmount'], 2, '.', ''));
                                         ?>
                                             <td><?php echo $row['Date']; ?></td>
                                             <td><?php echo $row['ProductCode']; ?></td>
@@ -365,25 +391,24 @@ $result = mysqli_query($con, $query);
                                             <td><?php echo $row['ShippingAddress']; ?></td>
                                             <td><?php echo $row['Biller']; ?></td>
                                             <td><?php echo $row['Quantity']; ?></td>
-                                            <td><?php echo $row['SalesAmount']; ?></td>
+                                            <td><?php echo 'Rs ' . $formattedSalesAmount; ?></td> <!-- Display formatted SalesAmount -->
                                             <td>
-                                            <form method="post" action="updatesale.php">
-                                                <input type="hidden" name="sale_id" value="<?php echo $row['SaleID']; ?>">
-                                                <select name="payment_status" class="payment-status 
-                                                    <?php echo strtolower($row['PaymentStatus']); ?>"
-                                                    onchange="this.form.submit()">
-                                                    <option value="Paid" <?php echo $row['PaymentStatus'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
-                                                    <option value="Unpaid" <?php echo $row['PaymentStatus'] === 'Unpaid' ? 'selected' : ''; ?>>Unpaid</option>
-                                                    <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
-                                                </select>
-                                            </form>
+                                                <form method="post" action="updatesale.php">
+                                                    <input type="hidden" name="sale_id" value="<?php echo $row['SaleID']; ?>">
+                                                    <select name="payment_status" class="payment-status <?php echo strtolower($row['PaymentStatus']); ?>"
+                                                        onchange="this.form.submit()">
+                                                        <option value="Paid" <?php echo $row['PaymentStatus'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
+                                                        <option value="Unpaid" <?php echo $row['PaymentStatus'] === 'Unpaid' ? 'selected' : ''; ?>>Unpaid</option>
+                                                        <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
+                                                    </select>
+                                                </form>
                                             </td>
                                             <td>
                                                 <form method="post" action="deletesale.php" style="display:inline;">
                                                     <input type="hidden" name="sale_id" id="sale_id" value="<?php echo $row['SaleID']; ?>">
                                                     <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this sale record?');">Delete</button>
                                                 </form>
-                                                </>
+                                            </td>
                                     </tr>
                                 <?php
                                         }
@@ -400,7 +425,7 @@ $result = mysqli_query($con, $query);
     <!-- Wrapper End-->
 
 
-    
+
     <!-- Backend Bundle JavaScript -->
     <script src="./js/backend-bundle.min.js"></script>
 

@@ -6,9 +6,9 @@ if (!isset($_SESSION["email"])) {
 }
 $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
 
- require_once('config/db.php');
- $query= "select * from `product`";
- $result= mysqli_query($con,$query);
+require_once('config/db.php');
+$query = "select * from `product`";
+$result = mysqli_query($con, $query);
 
 ?>
 
@@ -33,7 +33,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
 </head>
 
 <body class="  ">
-<div id="alert-container"></div>
+    <div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -130,25 +130,27 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                         </li>
                         <li class=" ">
                             <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                     <line x1="1" y1="10" x2="23" y2="10"></line>
                                 </svg>
                                 <span class="ml-4">Purchases</span>
                                 <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                            <a href="./page-list-purchase.php">
-                                                <i class="las la-minus"></i><span>List Purchases</span>
-                                            </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="./page-add-purchase.php">
-                                            <i class="las la-minus"></i><span>Add purchase</span>
-                                        </a>
-                                    </li>
+                                <li class="">
+                                    <a href="./page-list-purchase.php">
+                                        <i class="las la-minus"></i><span>List Purchases</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="./page-add-purchase.php">
+                                        <i class="las la-minus"></i><span>Add purchase</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
@@ -185,7 +187,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                 </li>
                             </ul>
                         </li>
-                        
+
 
 
                     </ul>
@@ -246,7 +248,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                         </svg>
                                         <span class="bg-primary"></span>
                                     </a>
-                                    
+
                                 </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
@@ -275,8 +277,8 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
-                                                <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
+                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>
+                                                    <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
@@ -291,6 +293,28 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                 </nav>
             </div>
         </div>
+
+        <?php
+        function formatNepaliCurrency($number)
+        {
+            $exploded = explode('.', $number);
+            $intPart = $exploded[0];
+            $decimalPart = isset($exploded[1]) ? '.' . $exploded[1] : '';
+
+            $lastThree = substr($intPart, -3);
+            $remaining = substr($intPart, 0, -3);
+
+            if ($remaining != '') {
+                $remaining = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $remaining);
+                $formattedNumber = $remaining . ',' . $lastThree;
+            } else {
+                $formattedNumber = $lastThree;
+            }
+
+            return $formattedNumber . $decimalPart;
+        }
+        ?>
+
 
         <div class="content-page">
             <div class="container-fluid">
@@ -321,51 +345,54 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                 <tbody class="ligth-body">
                                     <tr>
                                         <?php
-                                        while($row= mysqli_fetch_assoc($result))
-                                        {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            // Format Cost and Price in Nepali currency
+                                            $formattedCost = formatNepaliCurrency(number_format($row['Cost'], 2, '.', ''));
+                                            $formattedPrice = formatNepaliCurrency(number_format($row['Price'], 2, '.', ''));
                                         ?>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                            <img src="<?php echo $row['Url']; ?>" alt="Img" style="width:85px; height:77px; border-radius: 10px; object-fit: cover; margin-right: 10px;">
-                                                <div style="display: flex; flex-direction: column; justify-content: center;">
-                                                <strong><?php echo $row['ProductName']; ?></strong>
-                                                <p class="mb-0 text-muted"><small><?php echo $row['Description']; ?></small></p>
+                                            <td style="text-align: left;">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="<?php echo $row['Url']; ?>" alt="Img" style="width:85px; height:77px; border-radius: 10px; object-fit: cover; margin-right: 25px;">
+                                                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                                                        <strong><?php echo $row['ProductName']; ?></strong>
+                                                        <p class="mb-0 text-muted"><small><?php echo $row['Description']; ?></small></p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td><?php echo $row['ProductCode']; ?></td>
-                                        <td><?php echo $row['Supplier-PAN']; ?></td>
-                                        <td><?php echo $row['Cost']; ?></td>
-                                        <td><?php echo $row['Price']; ?></td>
-                                        <td><?php echo $row['Quantity']; ?></td>
-                                        <td><a href="deleteproduct.php?prod_code=<?php echo $row['ProductCode'] ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a></td>
-                                        </tr>
-                                        <?php
-                                        }  
-                                        ?>
+                                            </td>
+                                            <td><?php echo $row['ProductCode']; ?></td>
+                                            <td><?php echo $row['Supplier-PAN']; ?></td>
+                                            <td><?php echo 'Rs ' . $formattedCost; ?></td> <!-- Display formatted cost -->
+                                            <td><?php echo 'Rs ' . $formattedPrice; ?></td> <!-- Display formatted price -->
+                                            <td><?php echo $row['Quantity']; ?></td>
+                                            <td><a href="deleteproduct.php?prod_code=<?php echo $row['ProductCode'] ?>" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a></td>
+                                    </tr>
+                                <?php
+                                        }
+                                ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
                 </div>
                 <!-- Page end  -->
             </div>
-            
-            
+
+
         </div>
     </div>
     <!-- Wrapper End-->
-    
-     <!-- Backend Bundle JavaScript -->
-     <script src="./js/backend-bundle.min.js"></script>
 
-     <!-- Table Treeview JavaScript -->
-     <script src="./js/table-treeview.js"></script>
- 
- 
-     <script src="./js/login_signup.js"></script>
-     <!-- app JavaScript -->
-     <script src="./js/app.js"></script>
+    <!-- Backend Bundle JavaScript -->
+    <script src="./js/backend-bundle.min.js"></script>
+
+    <!-- Table Treeview JavaScript -->
+    <script src="./js/table-treeview.js"></script>
+
+
+    <script src="./js/login_signup.js"></script>
+    <!-- app JavaScript -->
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

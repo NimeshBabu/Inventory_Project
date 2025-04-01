@@ -37,7 +37,7 @@ $result = mysqli_query($con, $query);
             padding: 6px;
             border-radius: 10px;
             font-weight: bold;
-            font-size:0.75rem;
+            font-size: 0.75rem;
             transition: background-color 0.3s, color 0.3s;
             cursor: pointer;
         }
@@ -67,7 +67,7 @@ $result = mysqli_query($con, $query);
 </head>
 
 <body class="  ">
-<div id="alert-container"></div>
+    <div id="alert-container"></div>
     <!-- Wrapper Start -->
     <div class="wrapper">
 
@@ -311,8 +311,8 @@ $result = mysqli_query($con, $query);
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
-                                                <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
+                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>
+                                                    <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
@@ -327,6 +327,31 @@ $result = mysqli_query($con, $query);
                 </nav>
             </div>
         </div>
+
+
+        
+        <?php
+        function formatNepaliCurrency($number)
+        {
+            $exploded = explode('.', $number);
+            $intPart = $exploded[0];
+            $decimalPart = isset($exploded[1]) ? '.' . $exploded[1] : '';
+
+            // Apply Nepali currency formatting
+            $lastThree = substr($intPart, -3);
+            $remaining = substr($intPart, 0, -3);
+
+            if ($remaining != '') {
+                $remaining = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $remaining);
+                $formattedNumber = $remaining . ',' . $lastThree;
+            } else {
+                $formattedNumber = $lastThree;
+            }
+
+            return $formattedNumber . $decimalPart;
+        }
+        ?>
+
         <div class="content-page">
             <div class="container-fluid">
                 <div class="row">
@@ -357,37 +382,39 @@ $result = mysqli_query($con, $query);
                                     <tr>
                                         <?php
                                         while ($row = mysqli_fetch_assoc($result)) {
+                                            // Format PurchaseAmount in Nepali currency
+                                            $formattedAmount = formatNepaliCurrency(number_format($row['PurchaseAmount'], 2, '.', ''));
+
                                         ?>
                                             <td><?php echo $row['Date']; ?></td>
                                             <td><?php echo $row['ProductCode']; ?></td>
                                             <td><?php echo $row['Supplier-PAN']; ?></td>
                                             <td><?php echo $row['Quantity']; ?></td>
-                                            <td><?php echo $row['PurchaseAmount']; ?></td>
+                                            <td><?php echo 'Rs ' . $formattedAmount; ?></td>
                                             <td>
-                                            <form method="post" action="updatepurchase.php">
-                                                <input type="hidden" name="purchase_id" value="<?php echo $row['PurchaseID']; ?>">
-                                                <select name="payment_status" class="payment-status 
-                                                    <?php echo strtolower($row['PaymentStatus']); ?>"
-                                                    onchange="this.form.submit()">
-                                                    <option value="Paid" <?php echo $row['PaymentStatus'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
-                                                    <option value="Unpaid" <?php echo $row['PaymentStatus'] === 'Unpaid' ? 'selected' : ''; ?>>Unpaid</option>
-                                                    <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
-                                                </select>
-                                            </form>
+                                                <form method="post" action="updatepurchase.php">
+                                                    <input type="hidden" name="purchase_id" value="<?php echo $row['PurchaseID']; ?>">
+                                                    <select name="payment_status" class="payment-status <?php echo strtolower($row['PaymentStatus']); ?>"
+                                                        onchange="this.form.submit()">
+                                                        <option value="Paid" <?php echo $row['PaymentStatus'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
+                                                        <option value="Unpaid" <?php echo $row['PaymentStatus'] === 'Unpaid' ? 'selected' : ''; ?>>Unpaid</option>
+                                                        <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
+                                                    </select>
+                                                </form>
                                             </td>
                                             <td>
                                                 <form method="post" action="deletepurchase.php" style="display:inline;">
                                                     <input type="hidden" name="purchase_id" id="purchase_id" value="<?php echo $row['PurchaseID']; ?>">
                                                     <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this purchase record?');">Delete</button>
                                                 </form>
-                                               
-
                                             </td>
                                     </tr>
                                 <?php
                                         }
                                 ?>
                                 </tbody>
+
+
                             </table>
                         </div>
                     </div>

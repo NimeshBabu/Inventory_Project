@@ -1,14 +1,14 @@
 <?php
 session_start();
- if (!isset($_SESSION["email"])) {
+if (!isset($_SESSION["email"])) {
     header("Location: login_html.php");
     exit();
 }
 $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
 
- require_once('config/db.php');
- $query= "select * from product";
- $result= mysqli_query($con,$query);
+require_once('config/db.php');
+$query = "select * from product";
+$result = mysqli_query($con, $query);
 
 ?>
 
@@ -130,25 +130,27 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                         </li>
                         <li class=" ">
                             <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                     <line x1="1" y1="10" x2="23" y2="10"></line>
                                 </svg>
                                 <span class="ml-4">Purchases</span>
                                 <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                            <a href="./page-list-purchase.php">
-                                                <i class="las la-minus"></i><span>List Purchases</span>
-                                            </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="./page-add-purchase.php">
-                                            <i class="las la-minus"></i><span>Add purchase</span>
-                                        </a>
-                                    </li>
+                                <li class="">
+                                    <a href="./page-list-purchase.php">
+                                        <i class="las la-minus"></i><span>List Purchases</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="./page-add-purchase.php">
+                                        <i class="las la-minus"></i><span>Add purchase</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
@@ -185,7 +187,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                 </li>
                             </ul>
                         </li>
-                        
+
 
 
                     </ul>
@@ -246,7 +248,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                         </svg>
                                         <span class="bg-primary"></span>
                                     </a>
-                                    
+
                                 </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
@@ -275,8 +277,8 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
-                                                <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
+                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>
+                                                    <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
@@ -304,13 +306,13 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                             <div class="card-body">
                                 <form action="addsale.php" data-toggle="validator" method="POST">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Date *</label>
                                                 <input type="date" class="form-control" id="dob" name="dob" required>
-                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Product Code *</label>
@@ -319,12 +321,11 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                                     <?php
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" 
-                                                                 . htmlspecialchars($row['ProductName']) . " - " 
-                                                                 . htmlspecialchars($row['ProductCode']) . 
-                                                                 "</option>";
+                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>"
+                                                                . htmlspecialchars($row['ProductName']) . " - "
+                                                                . htmlspecialchars($row['ProductCode']) .
+                                                                "</option>";
                                                         }
-                                                        
                                                     } else {
                                                         echo "<option value=''>No Product Code available</option>";
                                                     }
@@ -332,48 +333,47 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                                 </select>
                                             </div>
                                         </div>
-                                        <?php
-                                        $con->close();
-                                        ?>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Customer *</label>
                                                 <input type="text" class="form-control" placeholder="Enter Customer" name="customer" id="customer" required>
-                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Shipping Address *</label>
                                                 <input type="text" class="form-control" placeholder="Enter Shipping Address" name="ship_add" id="ship_add" required>
-                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                            <label for="biller">Biller *</label>
-                                                <select name="biller" id="biller" class="form-control"  required>
+                                                <label for="biller">Biller *</label>
+                                                <select name="biller" id="biller" class="form-control" required>
                                                     <option value="" disabled selected>Select Biller</option>
-                                                    <option >Biller A</option>
-                                                    <option >Biller B</option>
-                                                    <option >Biller C</option>
-                                                    <option >Biller D</option>
+                                                    <option>Biller A</option>
+                                                    <option>Biller B</option>
+                                                    <option>Biller C</option>
+                                                    <option>Biller D</option>
                                                 </select>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Quantity *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity"
-                                                    required>
-                                                <div class="help-block with-errors"></div>
+                                                <input type="number" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity" required min="1">
+                                                <small id="stock_info" style="display: none; font-size: 15px; color: green; font-weight: bold;"></small>
+                                                <small id="total_sale_display" style="display: none; font-size:15px; color: green; font-weight:bold;"></small>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                            <label for="pay_status">Payment Status *</label>
-                                                <select name="pay_status" id="pay_status" class="form-control" name="pay_status" id="pay_status" required>
+                                                <label>Payment Status *</label>
+                                                <select name="pay_status" id="pay_status" class="form-control" required>
                                                     <option value="" disabled selected>Select Payment Status</option>
                                                     <option value="paid">Paid</option>
                                                     <option value="unpaid">Unpaid</option>
@@ -381,9 +381,16 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                                 </select>
                                             </div>
                                         </div>
-                                        
-                                        
+
+                                        <div class="col-md-6" id="due_amount_section" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="due_amount">Due Amount *</label>
+                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0">
+                                                <small id="due_warning" style="display: none; font-size: 15px; color: red; font-weight: bold;">Due Amount should be less than Sale Amount!</small>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <button type="submit" class="btn btn-primary mr-2">Add Sale</button>
                                     <button type="reset" class="btn btn-danger">Reset</button>
                                 </form>
@@ -391,12 +398,11 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                         </div>
                     </div>
                 </div>
-                <!-- Page end  -->
             </div>
         </div>
     </div>
     <!-- Wrapper End-->
-   
+
 
 
 
@@ -411,6 +417,77 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
     <script src="./js/login_signup.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const payStatus = document.getElementById("pay_status");
+            const dueAmountSection = document.getElementById("due_amount_section");
+            const dueAmountInput = document.getElementById("due_amount");
+            const totalSaleDisplay = document.getElementById("total_sale_display");
+            const dueWarning = document.getElementById("due_warning");
+            const quantityInput = document.getElementById("quantity");
+            const productSelect = document.getElementById("product_code");
+            const stockInfo = document.getElementById("stock_info");
+
+            let saleAmount = 0;
+            let stockAvailable = 0;
+
+            function fetchProductStockAndPrice(productCode, callback) {
+                fetch(`get_product_stock_and_price.php?product_code=${productCode}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.stock && data.cost) {
+                            callback(data.stock, data.cost);
+                        }
+                    })
+                    .catch(error => console.error("Error fetching product data:", error));
+            }
+
+            function updateSaleAmount() {
+                const quantity = parseFloat(quantityInput.value) || 0;
+                const productCode = productSelect.value;
+
+                if (productCode && quantity > 0) {
+                    fetchProductStockAndPrice(productCode, function(stock, cost) {
+                        stockAvailable = stock;
+                        stockInfo.innerHTML = `Stock available: ${stock}`;
+                        stockInfo.style.display = "block";
+
+                        saleAmount = cost * quantity;
+                        totalSaleDisplay.innerHTML = `Total Sale Amount: Rs. ${saleAmount.toFixed(2)}`;
+                        totalSaleDisplay.style.display = "block";
+                    });
+                } else {
+                    stockInfo.style.display = "none";
+                    totalSaleDisplay.style.display = "none";
+                }
+            }
+
+            // Show or Hide Due Amount Field
+            payStatus.addEventListener("change", function() {
+                if (payStatus.value === "due") {
+                    dueAmountSection.style.display = "block";
+                } else {
+                    dueAmountSection.style.display = "none";
+                    dueAmountInput.value = "";
+                    dueWarning.style.display = "none";
+                }
+            });
+
+            // Validate Due Amount
+            dueAmountInput.addEventListener("input", function() {
+                const dueAmount = parseFloat(dueAmountInput.value) || 0;
+                if (dueAmount >= saleAmount) {
+                    dueWarning.style.display = "block";
+                } else {
+                    dueWarning.style.display = "none";
+                }
+            });
+
+            // Update sale amount when quantity or product changes
+            quantityInput.addEventListener("input", updateSaleAmount);
+            productSelect.addEventListener("change", updateSaleAmount);
+        });
+    </script>
 </body>
 
 </html>

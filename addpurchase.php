@@ -16,6 +16,7 @@
     $product_code=$_POST['product_code'];
     $quantity=$_POST['quantity'];
     $pay_status=$_POST['pay_status'];
+    $due_amount=$_POST['due_amount'];
     
     
     $select_sql = "SELECT 
@@ -35,8 +36,9 @@
         $supplier_pan = $row['Supplier_PAN'];
 
         // Insert into the purchase table
-        $sql = "INSERT INTO `purchase` (`Date`, `ProductCode`, `Quantity`, `PaymentStatus`, `PurchaseAmount`, `Supplier-PAN`) 
-                       VALUES ('$date', '$product_code', '$quantity', '$pay_status', '$purchase_amount', '$supplier_pan')";
+        $sql = "INSERT INTO `purchase` (`Date`, `ProductCode`, `Quantity`, `PaymentStatus`, `PurchaseAmount`, `DueAmount`, `Supplier-PAN`) 
+        VALUES ('$date', '$product_code', '$quantity', '$pay_status', '$purchase_amount', '$due_amount', '$supplier_pan')";
+
 
    
     if (mysqli_query($conn, $sql)) {

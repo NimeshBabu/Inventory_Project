@@ -1,15 +1,15 @@
 <?php
- session_start();
- if (!isset($_SESSION["email"])) {
-     header("Location: login_html.php");
-     exit();
- }
- $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
+session_start();
+if (!isset($_SESSION["email"])) {
+    header("Location: login_html.php");
+    exit();
+}
+$date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) : "Unknown";
 
- require_once('config/db.php');
- $query= "select * from product";
- $result= mysqli_query($con,$query);
- 
+require_once('config/db.php');
+$query = "select * from product";
+$result = mysqli_query($con, $query);
+
 
 ?>
 
@@ -131,25 +131,27 @@
                         </li>
                         <li class=" ">
                             <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                     <line x1="1" y1="10" x2="23" y2="10"></line>
                                 </svg>
                                 <span class="ml-4">Purchases</span>
                                 <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                            <a href="./page-list-purchase.php">
-                                                <i class="las la-minus"></i><span>List Purchases</span>
-                                            </a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="./page-add-purchase.php">
-                                            <i class="las la-minus"></i><span>Add purchase</span>
-                                        </a>
-                                    </li>
+                                <li class="">
+                                    <a href="./page-list-purchase.php">
+                                        <i class="las la-minus"></i><span>List Purchases</span>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="./page-add-purchase.php">
+                                        <i class="las la-minus"></i><span>Add purchase</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
@@ -186,7 +188,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
 
 
                     </ul>
@@ -247,7 +249,7 @@
                                         </svg>
                                         <span class="bg-primary"></span>
                                     </a>
-                                    
+
                                 </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
@@ -276,8 +278,8 @@
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
-                                                <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>                                                   
-                                                <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
+                                                    <h5 class="mb-1"><?php echo htmlspecialchars($_SESSION["email"]); ?></h5>
+                                                    <p class="mb-0">Since <?php echo htmlspecialchars($_SESSION["date"]); ?></p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="logout.php" class="btn border">Log Out</a>
                                                     </div>
@@ -305,32 +307,35 @@
                             </div>
                             <div class="card-body">
                                 <form action="addpurchase.php" data-toggle="validator" method="POST">
-
-                                
-
-
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="dob">Date *</label>
                                                 <input type="date" class="form-control" id="dob" name="dob" required>
-                                                <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Product Code *</label>
                                                 <select class="form-control" name="product_code" id="product_code" required>
                                                     <option value="" disabled selected>Select Product Code</option>
                                                     <?php
+                                                    $conn = new mysqli("localhost", "root", "", "inventrix");
+                                                    if ($conn->connect_error) {
+                                                        die("Connection failed: " . $conn->connect_error);
+                                                    }
+
+                                                    $query = "SELECT ProductCode, ProductName FROM product";
+                                                    $result = $conn->query($query);
+
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" 
-                                                                 . htmlspecialchars($row['ProductName']) . " - " 
-                                                                 . htmlspecialchars($row['ProductCode']) . 
-                                                                 "</option>";
+                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>"
+                                                                . htmlspecialchars($row['ProductName']) . " - "
+                                                                . htmlspecialchars($row['ProductCode']) .
+                                                                "</option>";
                                                         }
-                                                        
                                                     } else {
                                                         echo "<option value=''>No Product Code available</option>";
                                                     }
@@ -339,18 +344,14 @@
                                             </div>
                                         </div>
 
-                                        <?php
-                                        $con->close();
-                                        ?>
-
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Quantity *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity"
-                                                    required>
-                                                <div class="help-block with-errors"></div>
+                                                <input type="number" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity" required min="1">
+                                                <small id="total_purchase_display"  style="display: none; font-size:15px; color: green; font-weight:bold;"></small>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="pay_status">Payment Status *</label>
@@ -363,9 +364,17 @@
                                             </div>
                                         </div>
 
+                                        <!-- Due Amount (Hidden by Default) -->
+                                        <div class="col-md-6" id="due_amount_section" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="due_amount">Due Amount *</label>
+                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0">
+                                                <small id="due_warning" style="display: none; font-size:15px; color: red; font-weight:bold;">Due Amount should be less than Purchase Amount!</small>
+                                            </div>
+                                        </div>
 
-                                        
                                     </div>
+
                                     <button type="submit" class="btn btn-primary mr-2">Add Purchase</button>
                                     <button type="reset" class="btn btn-danger">Reset</button>
                                 </form>
@@ -373,7 +382,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Page end  -->
             </div>
         </div>
     </div>
@@ -387,6 +395,72 @@
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>
     <script src="./js/login_signup.js"></script>
+    <!-- JavaScript to Handle Due Amount Calculation -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const payStatus = document.getElementById("pay_status");
+            const dueAmountSection = document.getElementById("due_amount_section");
+            const dueAmountInput = document.getElementById("due_amount");
+            const totalPurchaseDisplay = document.getElementById("total_purchase_display");
+            const dueWarning = document.getElementById("due_warning");
+            const quantityInput = document.getElementById("quantity");
+            const productSelect = document.getElementById("product_code");
+
+            let purchaseAmount = 0;
+
+            function fetchProductCost(productCode, callback) {
+                fetch(`get_product_cost.php?product_code=${productCode}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.cost) {
+                            callback(data.cost);
+                        }
+                    })
+                    .catch(error => console.error("Error fetching product cost:", error));
+            }
+
+            function updatePurchaseAmount() {
+                const quantity = parseFloat(quantityInput.value) || 0;
+                const productCode = productSelect.value;
+
+                if (productCode && quantity > 0) {
+                    fetchProductCost(productCode, function(cost) {
+                        purchaseAmount = cost * quantity;
+                        totalPurchaseDisplay.innerHTML = `Total Purchase Amount: Rs. ${purchaseAmount.toFixed(2)}`;
+                        totalPurchaseDisplay.style.display = "block";
+                    });
+                } else {
+                    totalPurchaseDisplay.style.display = "none";
+                }
+            }
+
+            // Show or Hide Due Amount Field
+            payStatus.addEventListener("change", function() {
+                if (payStatus.value === "due") {
+                    dueAmountSection.style.display = "block";
+                } else {
+                    dueAmountSection.style.display = "none";
+                    dueAmountInput.value = "";
+                    dueWarning.style.display = "none";
+                }
+            });
+
+            // Validate Due Amount
+            dueAmountInput.addEventListener("input", function() {
+                const dueAmount = parseFloat(dueAmountInput.value) || 0;
+                if (dueAmount >= purchaseAmount) {
+                    dueWarning.style.display = "block";
+                } else {
+                    dueWarning.style.display = "none";
+                }
+            });
+
+            // Update purchase amount when quantity or product changes
+            quantityInput.addEventListener("input", updatePurchaseAmount);
+            productSelect.addEventListener("change", updatePurchaseAmount);
+        });
+    </script>
+
 </body>
 
 </html>
