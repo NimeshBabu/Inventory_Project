@@ -302,91 +302,126 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form action="addsale.php" data-toggle="validator" method="POST">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Date *</label>
-                                                <input type="date" class="form-control" id="dob" name="dob" required>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Product Code *</label>
-                                                <select class="form-control" name="product_code" id="product_code" required>
-                                                    <option value="" disabled selected>Select Product Code</option>
-                                                    <?php
-                                                    if ($result->num_rows > 0) {
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" 
-                                                                 . htmlspecialchars($row['ProductName']) . " - " 
-                                                                 . htmlspecialchars($row['ProductCode']) . 
-                                                                 "</option>";
-                                                        }
-                                                        
-                                                    } else {
-                                                        echo "<option value=''>No Product Code available</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <?php
-                                        $con->close();
-                                        ?>
+                            <form action="addsale.php" data-toggle="validator" method="POST">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Date *</label>
+                <input type="date" class="form-control" id="dob" name="dob" required>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Customer *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Customer" name="customer" id="customer" required>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Shipping Address *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Shipping Address" name="ship_add" id="ship_add" required>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                            <label for="biller">Biller *</label>
-                                                <select name="biller" id="biller" class="form-control"  required>
-                                                    <option value="" disabled selected>Select Biller</option>
-                                                    <option >Biller A</option>
-                                                    <option >Biller B</option>
-                                                    <option >Biller C</option>
-                                                    <option >Biller D</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Quantity *</label>
-                                                <input type="text" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity"
-                                                    required>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                            <label for="pay_status">Payment Status *</label>
-                                                <select name="pay_status" id="pay_status" class="form-control" name="pay_status" id="pay_status" required>
-                                                    <option value="" disabled selected>Select Payment Status</option>
-                                                    <option value="paid">Paid</option>
-                                                    <option value="unpaid">Unpaid</option>
-                                                    <option value="due">Due</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mr-2">Add Sale</button>
-                                    <button type="reset" class="btn btn-danger">Reset</button>
-                                </form>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Product Code *</label>
+                <select class="form-control" name="product_code" id="product_code" required>
+                    <option value="" disabled selected>Select Product Code</option>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='" . htmlspecialchars($row['ProductCode']) . "'>" 
+                                 . htmlspecialchars($row['ProductName']) . " - " 
+                                 . htmlspecialchars($row['ProductCode']) . 
+                                 "</option>";
+                        }
+                    } else {
+                        echo "<option value=''>No Product Code available</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Customer *</label>
+                <input type="text" class="form-control" placeholder="Enter Customer" name="customer" id="customer" required>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Shipping Address *</label>
+                <input type="text" class="form-control" placeholder="Enter Shipping Address" name="ship_add" id="ship_add" required>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Biller *</label>
+                <select name="biller" id="biller" class="form-control" required>
+                    <option value="" disabled selected>Select Biller</option>
+                    <option>Biller A</option>
+                    <option>Biller B</option>
+                    <option>Biller C</option>
+                    <option>Biller D</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+    <div class="form-group">
+        <label>Quantity *</label>
+        <input type="text" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity" required>
+        <small id="stock-info" style="color: green; font-weight: bold;"></small> <!-- Stock info will be shown here -->
+        <div class="help-block with-errors"></div>
+    </div>
+</div>
+
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="pay_status">Payment Status *</label>
+                <select name="pay_status" id="pay_status" class="form-control" required>
+                    <option value="" disabled selected>Select Payment Status</option>
+                    <option value="paid">Paid</option>
+                    <option value="unpaid">Unpaid</option>
+                    <option value="due">Due</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary mr-2">Add Sale</button>
+    <button type="reset" class="btn btn-danger">Reset</button>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    let productDropdown = document.getElementById("product_code");
+    let stockInfo = document.getElementById("stock-info");
+
+    productDropdown.addEventListener("change", function () {
+        let productCode = this.value;
+
+        if (productCode) {
+            fetch("fetch_stock.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "product_code=" + encodeURIComponent(productCode)
+            })
+            .then(response => response.text())
+            .then(data => {
+                stockInfo.innerHTML = " Available Stock: " + data;
+            })
+            .catch(error => {
+                stockInfo.innerHTML = " Error fetching stock!";
+                console.error("Error:", error);
+            });
+        } else {
+            stockInfo.innerHTML = "";
+        }
+    });
+});
+
+
+</script>
+
                             </div>
                         </div>
                     </div>

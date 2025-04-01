@@ -407,14 +407,14 @@ if (!$conn) {
 // SQL Query to get top products
 $sql_top_products = "SELECT 
     p.ProductName,
-    p.Quantity,
+    p.Quantity AS stock_quantity,
     p.Url,
-    COUNT(s.ProductCode) as sales_count
-    FROM product p
-    LEFT JOIN sales s ON p.ProductCode = s.ProductCode
-    GROUP BY p.ProductCode
-    ORDER BY sales_count DESC
-    LIMIT 6";
+    COALESCE(SUM(s.Quantity), 0) AS sales_quantity
+FROM product p
+LEFT JOIN sales s ON p.ProductCode = s.ProductCode
+GROUP BY p.ProductCode
+ORDER BY sales_quantity DESC
+LIMIT 6";
 
 $result_top_products = mysqli_query($conn, $sql_top_products);
 
@@ -437,7 +437,7 @@ if (!$result_top_products) {
                         </div>
                         <div class="style-text text-left mt-3">
                             <h5 class="mb-1"><?php echo htmlspecialchars($row['ProductName']); ?></h5>
-                            <p class="mb-0"><?php echo $row['sales_count']; ?> Items Sold</p>
+                            <p class="mb-0"><?php echo $row['sales_quantity']; ?> Items Sold</p>
                         </div>
                     </div>
                 </div>
