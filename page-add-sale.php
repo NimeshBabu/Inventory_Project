@@ -385,7 +385,7 @@ $result = mysqli_query($con, $query);
                                         <div class="col-md-6" id="due_amount_section" style="display: none;">
                                             <div class="form-group">
                                                 <label for="due_amount">Due Amount *</label>
-                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0" placeholder="Enter Due Amount" required>
+                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0" placeholder="Enter Due Amount">
                                                 <small id="due_warning" style="display: none; font-size: 15px; color: red; font-weight: bold;">Due Amount should be less than Sale Amount!</small>
                                             </div>
                                         </div>
