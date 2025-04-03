@@ -264,7 +264,7 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
                                         <div class="card shadow-none m-0">
                                             <div class="card-body p-0 text-center">
                                                 <div class="media-body profile-detail text-center">
-                                                    <img src="./assets/images/page-img/profile-bg.jpg" alt="profile-bg"
+                                                    <img src="./assets/images/page-img/abc.png" alt="profile-bg"
                                                         class="rounded-top img-fluid mb-4">
                                                     <img src="./assets/images/user/1.png" alt="profile-img"
                                                         class="rounded profile-img img-fluid avatar-70">

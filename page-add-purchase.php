@@ -271,7 +271,7 @@ $result = mysqli_query($con, $query);
                                         <div class="card shadow-none m-0">
                                             <div class="card-body p-0 text-center">
                                                 <div class="media-body profile-detail text-center">
-                                                    <img src="./assets/images/page-img/profile-bg.jpg" alt="profile-bg"
+                                                    <img src="./assets/images/page-img/abc.png" alt="profile-bg"
                                                         class="rounded-top img-fluid mb-4">
                                                     <img src="./assets/images/user/1.png" alt="profile-img"
                                                         class="rounded profile-img img-fluid avatar-70">
@@ -367,7 +367,7 @@ $result = mysqli_query($con, $query);
                                         <div class="col-md-6" id="due_amount_section" style="display: none;">
                                             <div class="form-group">
                                                 <label for="due_amount">Due Amount *</label>
-                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0" placeholder="Enter Due Amount" required>
+                                                <input type="number" class="form-control" name="due_amount" id="due_amount" min="0" placeholder="Enter Due Amount">
                                                 <small id="due_warning" style="display: none; font-size:15px; color: red; font-weight:bold;">Due Amount should be less than Purchase Amount!</small>
                                             </div>
                                         </div>
