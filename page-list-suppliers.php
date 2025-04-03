@@ -32,6 +32,31 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
     <link rel="stylesheet" href="./vendor/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="./vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
     <link rel="stylesheet" href="./vendor/remixicon/fonts/remixicon.css">
+    <style>
+        table.dataTable th {
+            position: relative;
+        }
+
+        table.dataTable th.sorting,
+        table.dataTable th.sorting_asc,
+        table.dataTable th.sorting_desc {
+            padding-right: 30px !important;
+        }
+
+        table.dataTable th.sorting:before,
+        table.dataTable th.sorting_asc:before,
+        table.dataTable th.sorting_desc:before {
+            position: absolute;
+            right: 10px;
+        }
+
+        table.dataTable th.sorting:after,
+        table.dataTable th.sorting_asc:after,
+        table.dataTable th.sorting_desc:after {
+            position: absolute;
+            right: 3px;
+        }
+    </style>
 </head>
 
 <body class="  ">

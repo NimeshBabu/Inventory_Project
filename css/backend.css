@@ -14989,11 +14989,11 @@ textarea.form-control {
   color: #32BDEA;
   background-color: transparent; }
 
-table.dataTable thead td {
+/* table.dataTable thead td {
   padding: 10px 10px !important; }
 
 table.dataTable thead th {
-  padding: 10px 10px !important; }
+  padding: 10px 10px !important; } */
 
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #ffffff; }
@@ -15058,14 +15058,14 @@ table.dataTable thead th {
   -o-border-radius: 10px;
   border-radius: 10px; }
 
-table.dataTable thead td {
+/* table.dataTable thead td {
   padding: 10px 18px;
   border-bottom: 1px solid #DCDFE8 !important; }
 
 table.dataTable thead th {
   padding: 10px 18px;
   border-bottom: 1px solid #DCDFE8 !important;
-  color: #110A57 !important; }
+  color: #110A57 !important; } */
 
 table.dataTable.no-footer {
   border-bottom: 1px solid #DCDFE8 !important; }
@@ -20255,25 +20255,6 @@ i {
 }
 
 
-.data-table{
-  table-layout: center;
-  text-align: center;
-}
-
-
-.data-tables {
-  table-layout:center;
-  text-align: center;
-}
-
-.data-tables th,
-.data-tables td {
-  
-  text-align: center;
-  vertical-align: middle;
-  padding: 10px;
-  
-}
 
 
 

@@ -449,18 +449,18 @@ $result = mysqli_query($con, $query);
                 if (productCode && quantity > 0) {
                     fetchProductStockAndPrice(productCode, function(stock, cost) {
                         stockAvailable = stock;
-                        stockInfo.innerHTML = `Stock available: ${stock}`;
-                        stockInfo.style.display = "block";
-
                         saleAmount = cost * quantity;
-                        totalSaleDisplay.innerHTML = `Total Sale Amount: Rs. ${saleAmount.toFixed(2)}`;
+
+                        // Display Total Sale Amount first, then Stock Available
+                        totalSaleDisplay.innerHTML = `<span style="margin-right: 20px;">Total Sale Amount: Rs. ${saleAmount.toFixed(2)}</span> Stock available: ${stock}`;
                         totalSaleDisplay.style.display = "block";
                     });
                 } else {
-                    stockInfo.style.display = "none";
                     totalSaleDisplay.style.display = "none";
                 }
             }
+
+
 
             // Show or Hide Due Amount Field
             payStatus.addEventListener("change", function() {
