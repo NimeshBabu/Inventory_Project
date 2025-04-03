@@ -271,7 +271,7 @@ $result = mysqli_query($con, $query);
                                         <div class="card shadow-none m-0">
                                             <div class="card-body p-0 text-center">
                                                 <div class="media-body profile-detail text-center">
-                                                    <img src="./assets/images/page-img/profile-bg.jpg" alt="profile-bg"
+                                                    <img src="./assets/images/page-img/abc.png" alt="profile-bg"
                                                         class="rounded-top img-fluid mb-4">
                                                     <img src="./assets/images/user/1.png" alt="profile-img"
                                                         class="rounded profile-img img-fluid avatar-70">
@@ -419,7 +419,7 @@ $result = mysqli_query($con, $query);
         if (productCode && quantity > 0) {
             fetchProductCost(productCode, function(cost) {
                 purchaseAmount = cost * quantity;
-                totalPurchaseDisplay.innerHTML = `Total Purchase Amount: Rs. ${purchaseAmount.toFixed(2)}`;
+                totalPurchaseDisplay.innerHTML = `Total Amount: Rs. ${purchaseAmount.toFixed(2)}`;
                 totalPurchaseDisplay.style.display = "block";
             });
         } else {

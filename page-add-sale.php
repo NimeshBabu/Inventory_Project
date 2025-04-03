@@ -271,7 +271,7 @@ $result = mysqli_query($con, $query);
                                         <div class="card shadow-none m-0">
                                             <div class="card-body p-0 text-center">
                                                 <div class="media-body profile-detail text-center">
-                                                    <img src="./assets/images/page-img/profile-bg.jpg" alt="profile-bg"
+                                                    <img src="./assets/images/page-img/abc.png" alt="profile-bg"
                                                         class="rounded-top img-fluid mb-4">
                                                     <img src="./assets/images/user/1.png" alt="profile-img"
                                                         class="rounded profile-img img-fluid avatar-70">
@@ -365,8 +365,8 @@ $result = mysqli_query($con, $query);
                                             <div class="form-group">
                                                 <label>Quantity *</label>
                                                 <input type="number" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity" required min="1">
-                                                <small id="stock_info" style="display: none; font-size: 15px; color: green; font-weight: bold;"></small>
                                                 <small id="total_sale_display" style="display: none; font-size:15px; color: green; font-weight:bold;"></small>
+                                                <small id="stock_info" style="display: none; font-size: 15px; color: green; font-weight: bold;"></small>
                                             </div>
                                         </div>
 
@@ -452,8 +452,7 @@ $result = mysqli_query($con, $query);
                         saleAmount = cost * quantity;
 
                         // Display Total Sale Amount first, then Stock Available
-                        totalSaleDisplay.innerHTML = `<span style="margin-right: 20px;">Total Sale Amount: Rs. ${saleAmount.toFixed(2)}</span> Stock available: ${stock}`;
-                        totalSaleDisplay.style.display = "block";
+                        totalSaleDisplay.innerHTML = `<span style="margin-right: 10px;">Total Amount: Rs. ${saleAmount.toFixed(2)},</span> Stock available: ${stock}`;                        totalSaleDisplay.style.display = "block";
                     });
                 } else {
                     totalSaleDisplay.style.display = "none";

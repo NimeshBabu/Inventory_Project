@@ -83,6 +83,11 @@ $result = mysqli_query($con, $query);
             position: absolute;
             right: 3px;
         }
+        .due-amount {
+            font-size: 0.8rem;
+            color:rgb(178, 11, 11); /* Bootstrap danger color */
+            margin-top: 5px;
+        }
     </style>
     
 
@@ -328,7 +333,7 @@ $result = mysqli_query($con, $query);
                                         <div class="card shadow-none m-0">
                                             <div class="card-body p-0 text-center">
                                                 <div class="media-body profile-detail text-center">
-                                                    <img src="./assets/images/page-img/profile-bg.jpg" alt="profile-bg"
+                                                    <img src="./assets/images/page-img/abc.png" alt="profile-bg"
                                                         class="rounded-top img-fluid mb-4">
                                                     <img src="./assets/images/user/1.png" alt="profile-img"
                                                         class="rounded profile-img img-fluid avatar-70">
@@ -426,6 +431,11 @@ $result = mysqli_query($con, $query);
                                                         <option value="Due" <?php echo $row['PaymentStatus'] === 'Due' ? 'selected' : ''; ?>>Due</option>
                                                     </select>
                                                 </form>
+                                                <?php if ($row['PaymentStatus'] === 'Due') { ?>
+                                                    <div class="due-amount">
+                                                        <small>Due Amount: Rs <?php echo formatNepaliCurrency(number_format($row['DueAmount'], 2, '.', '')); ?></small>
+                                                    </div>
+                                                <?php } ?>
                                             </td>
                                             <td>
                                                 <form method="post" action="deletesale.php" style="display:inline;">
