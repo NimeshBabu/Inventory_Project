@@ -419,7 +419,7 @@ $result = mysqli_query($con, $query);
         if (productCode && quantity > 0) {
             fetchProductCost(productCode, function(cost) {
                 purchaseAmount = cost * quantity;
-                totalPurchaseDisplay.innerHTML = `Total Purchase Amount: Rs. ${purchaseAmount.toFixed(2)}`;
+                totalPurchaseDisplay.innerHTML = `Total Amount: Rs. ${purchaseAmount.toFixed(2)}`;
                 totalPurchaseDisplay.style.display = "block";
             });
         } else {

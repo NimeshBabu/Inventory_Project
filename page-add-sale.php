@@ -365,8 +365,8 @@ $result = mysqli_query($con, $query);
                                             <div class="form-group">
                                                 <label>Quantity *</label>
                                                 <input type="number" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity" required min="1">
-                                                <small id="stock_info" style="display: none; font-size: 15px; color: green; font-weight: bold;"></small>
                                                 <small id="total_sale_display" style="display: none; font-size:15px; color: green; font-weight:bold;"></small>
+                                                <small id="stock_info" style="display: none; font-size: 15px; color: green; font-weight: bold;"></small>
                                             </div>
                                         </div>
 
@@ -449,15 +449,12 @@ $result = mysqli_query($con, $query);
                 if (productCode && quantity > 0) {
                     fetchProductStockAndPrice(productCode, function(stock, cost) {
                         stockAvailable = stock;
-                        stockInfo.innerHTML = `Stock available: ${stock}`;
-                        stockInfo.style.display = "block";
-
                         saleAmount = cost * quantity;
-                        totalSaleDisplay.innerHTML = `Total Sale Amount: Rs. ${saleAmount.toFixed(2)}`;
-                        totalSaleDisplay.style.display = "block";
+
+                        // Display Total Sale Amount first, then Stock Available
+                        totalSaleDisplay.innerHTML = `<span style="margin-right: 10px;">Total Amount: Rs. ${saleAmount.toFixed(2)},</span> Stock available: ${stock}`;                        totalSaleDisplay.style.display = "block";
                     });
                 } else {
-                    stockInfo.style.display = "none";
                     totalSaleDisplay.style.display = "none";
                 }
             }
