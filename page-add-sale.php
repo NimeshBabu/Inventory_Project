@@ -353,10 +353,10 @@ $result = mysqli_query($con, $query);
                                                 <label for="biller">Biller *</label>
                                                 <select name="biller" id="biller" class="form-control" required>
                                                     <option value="" disabled selected>Select Biller</option>
-                                                    <option>Biller A</option>
-                                                    <option>Biller B</option>
-                                                    <option>Biller C</option>
-                                                    <option>Biller D</option>
+                                                    <option>Nimesh</option>
+                                                    <option>Pratibha</option>
+                                                    <option>Kritisha</option>
+                                                    <option>Kripesh</option>
                                                 </select>
                                             </div>
                                         </div>
