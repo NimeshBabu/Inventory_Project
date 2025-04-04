@@ -10616,10 +10616,7 @@ body.tab-horizontal .iq-footer {
     .table .ligth.ligth-data th:last-child {
       background-image: none;
       text-align: center; }
-  /* .table .ligth-body tr td:first-child {
-    text-align: left; } */
-  .table .ligth-body tr td:last-child {
-    text-align: center; }
+
   .table .ligth-body .list-action {
     justify-content: center; }
   .table td {
