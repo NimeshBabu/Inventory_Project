@@ -10611,11 +10611,11 @@ body.tab-horizontal .iq-footer {
       border: 0px;
       font-weight: 700 !important; }
     .table .ligth.ligth-data th:first-child {
-      text-align: center;
       background-image: none; }
     .table .ligth.ligth-data th:last-child {
       background-image: none;
-      text-align: center; }
+     }
+      
 
   .table .ligth-body .list-action {
     justify-content: center; }

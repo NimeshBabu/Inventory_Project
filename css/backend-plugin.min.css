@@ -14633,7 +14633,6 @@ body.tab-horizontal .iq-footer {
 
 .table .ligth.ligth-data th:first-child,
 .table .ligth.ligth-data th:last-child {
-    text-align: center;
     background-image: none
 }
 
