@@ -14,7 +14,7 @@ try {
     }
 } catch (mysqli_sql_exception $e) {
     if ($e->getCode() == 1451) { // Foreign key constraint violation
-        $_SESSION['error'] = "Cannot delete! This supplier is linked to a product.";
+        $_SESSION['error'] = "Cannot delete!! This supplier is linked to a product.";
     } else {
         $_SESSION['error'] = "Failed to delete supplier record!";
     }

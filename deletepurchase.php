@@ -15,5 +15,6 @@ if (isset($_POST['purchase_id'])) {
 }
 
 header("Location: page-list-purchase.php"); // Redirect to the purchase list page
+
 exit();
 ?>

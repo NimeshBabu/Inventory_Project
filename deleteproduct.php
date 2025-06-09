@@ -28,5 +28,6 @@ if (mysqli_num_rows($check_result) > 0) {
 
 // Redirect back to product list page
 header("Location: page-list-product.php");
+
 exit();
 ?>
