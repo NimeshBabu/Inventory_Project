@@ -5,8 +5,7 @@ if (!isset($_SESSION["email"])) {
     exit();
 }
 
-
-
+// Database connection details
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -37,8 +36,6 @@ $total_suppliers = mysqli_fetch_assoc($result_total_suppliers)['total_suppliers'
 $sql_total_sales = "SELECT COUNT(*) as total_sales FROM sales";
 $result_total_sales = mysqli_query($conn, $sql_total_sales);
 $total_sales = mysqli_fetch_assoc($result_total_sales)['total_sales'];
-
-// Get top products in html
 
 
 // Get current month's income
