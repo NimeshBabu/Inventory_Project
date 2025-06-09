@@ -10,7 +10,7 @@
  if (!$conn){
      die("Sorry we failed to connect: ".mysqli_connect_error()); 
  }
-
+    
  if ($_SERVER['REQUEST_METHOD']=='POST'){           
     $prod_name=$_POST['prod_name'];
     $prod_code=$_POST['prod_code'];
@@ -21,16 +21,7 @@
     $desc=$_POST['desc'];
     $quantity=$_POST['quantity'];
 
-    // First get the SupplierID from Supplier table
-    // $result = $conn->query("SELECT SupplierID FROM Supplier WHERE Supplier = '$supplier'");
-    // if ($result->num_rows == 0) {
-    //     $_SESSION['error'] = "Error: Invalid supplier name.";
-    //     header("Location: page-add-product.php");
-    //     exit();
-    // }
-    // $supplierData = $result->fetch_assoc();
-    // $supplierID = $supplierData['SupplierID'];
-
+    
     $sql="SELECT * FROM `product` WHERE ProductCode='$prod_code'";
     $result=mysqli_query($conn,$sql);
     $num=mysqli_num_rows($result);
