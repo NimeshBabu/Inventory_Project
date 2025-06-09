@@ -63,7 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Start transaction
         mysqli_begin_transaction($conn);
         
-        try {
+        // Prepare the sale amount
+        try 
+        {
             // Insert into sales table
             $insert_sql = "INSERT INTO `sales` (`Date`, `ProductCode`, `Quantity`, `PaymentStatus`, `SalesAmount`, `DueAmount`, `Biller`, `Customer`, `ShippingAddress`) 
                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -81,7 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['success'] = "Sales record added & stock updated successfully!";
             header("Location: page-list-sale.php");
             exit();
-        } catch (Exception $e) {
+        } 
+        catch (Exception $e) 
+        {
             mysqli_rollback($conn);
             $_SESSION['error'] = "Something went wrong! Please try again.";
             header("Location: page-add-sale.php");
