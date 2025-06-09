@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $due_amount = 0;
         } 
         
-
         // Update the purchase record in the database
         $update_sql = "UPDATE purchase SET PaymentStatus = ?, DueAmount = ? WHERE PurchaseID = ?";
         $stmt = mysqli_prepare($conn, $update_sql);

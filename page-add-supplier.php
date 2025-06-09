@@ -8,7 +8,6 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
 
 ?>
 
-
 <!doctype html>
 <html lang="en">
 
@@ -359,8 +358,6 @@ $date = isset($_SESSION["date"]) ? date("d F, Y", strtotime($_SESSION["date"])) 
 
     <!-- Table Treeview JavaScript -->
     <script src="./js/table-treeview.js"></script>
-
-
 
     <!-- app JavaScript -->
     <script src="./js/app.js"></script>

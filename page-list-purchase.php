@@ -13,7 +13,6 @@ $result = mysqli_query($con, $query);
 ?>
 
 
-
 <!doctype html>
 <html lang="en">
 
