@@ -421,7 +421,7 @@ LIMIT 6";
 
                             // Check if the query was successful
                             if (!$result_top_products) {
-                                die("Query failed: " . mysqli_error($conn));
+                                die("Query failed:" . mysqli_error($conn));
                             }
                             ?>
 

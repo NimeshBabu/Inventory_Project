@@ -45,7 +45,6 @@
                
         }
         
-
         else {
             $_SESSION['error'] = "User does not exist! Please check your email.";
             header("Location: login_html.php");

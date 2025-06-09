@@ -1,15 +1,9 @@
-
-
 CREATE DATABASE inventrix;
 USE inventrix;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-
-
 
 CREATE TABLE `product` (
   `ProductCode` varchar(10) NOT NULL,
@@ -22,9 +16,6 @@ CREATE TABLE `product` (
   `Supplier-PAN` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product`
---
 
 INSERT INTO `product` (`ProductCode`, `ProductName`, `Cost`, `Price`, `Description`, `Url`, `Quantity`, `Supplier-PAN`) VALUES
 ('1043', 'Wall-mounted Bookshelf', 22000.00, 27000.00, '5-Shelf, White', 'https://www.nepal.ubuy.com/productimg/?image=aHR0cHM6Ly9pbWFnZXMtbmEuc3NsLWltYWdlcy1hbWF6b24uY29tL2ltYWdlcy9JLzYxOFIwNmVEWUlMLl9TUzQwMF8uanBn.jpg', 34, 'Global Exports-4562'),
@@ -73,9 +64,7 @@ CREATE TABLE `purchase` (
   `DueAmount` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `purchase`
---
+
 
 INSERT INTO `purchase` (`PurchaseID`, `Date`, `ProductCode`, `Quantity`, `PurchaseAmount`, `PaymentStatus`, `Supplier-PAN`, `DueAmount`) VALUES
 (1252, '2025-04-02', '1043', 10, 220000.00, 'Paid', 'Global Exports-4562', 0.00),
@@ -123,9 +112,7 @@ CREATE TABLE `sales` (
   `DueAmount` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `sales`
---
+
 
 INSERT INTO `sales` (`SaleID`, `Date`, `ProductCode`, `Customer`, `ShippingAddress`, `Biller`, `Quantity`, `SalesAmount`, `PaymentStatus`, `DueAmount`) VALUES
 (33, '2025-04-16', '5023', 'Ram ', 'Bhaktapur', 'Biller A', 3, 63000.00, 'Paid', 0.00),
@@ -153,10 +140,8 @@ INSERT INTO `sales` (`SaleID`, `Date`, `ProductCode`, `Customer`, `ShippingAddre
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `supplier`
---
-
+-- // Table structure for table `supplier`
+ 
 CREATE TABLE `supplier` (
   `Supplier-PAN` varchar(80) NOT NULL,
   `Supplier` varchar(50) NOT NULL,
@@ -166,9 +151,7 @@ CREATE TABLE `supplier` (
   `PANNo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `supplier`
---
+
 
 INSERT INTO `supplier` (`Supplier-PAN`, `Supplier`, `Email`, `PhoneNo`, `Address`, `PANNo`) VALUES
 ('ABC Company-1111', 'ABC Company', 'abc@email.com', '9843958141', 'Bagbazar', '1111'),
@@ -196,18 +179,12 @@ CREATE TABLE `user` (
   `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user`
---
 
 INSERT INTO `user` (`s_no`, `email`, `password`, `date`) VALUES
 (3, 'Kritisha123@gmail.com', '$2y$10$nF.mlRniMuEgLgTcwNya8uz6quU27RBVTDkuH8ZhyX8fAjUkFi/ZO', '2025-03-27'),
 (4, 'Nimesh123@gmail.com', '$2y$10$6MMxsoQdoH7bSBhbf./yx.LsYcufnCXZINnrkarmtNRwvU1Qgmt1.', '2025-03-27'),
 (5, 'Pratibha123@gmail.com', '$2y$10$0iyI0pPmwPz4Wv8cgbDRl.yW/cu.LaLWpzg.nSsWf.C0Gz2IVzcNq', '2025-03-27');
 
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `product`
@@ -245,9 +222,6 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`s_no`),
   ADD UNIQUE KEY `email` (`email`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
 --
 -- AUTO_INCREMENT for table `purchase`
@@ -266,10 +240,6 @@ ALTER TABLE `sales`
 --
 ALTER TABLE `user`
   MODIFY `s_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Constraints for dumped tables
---
 
 --
 -- Constraints for table `product`
